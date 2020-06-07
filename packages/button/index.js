@@ -1,5 +1,4 @@
-import Button from "./components/button";
+import sButton from "./components/button";
 
 
-
-export default Button;
+export default sButton;

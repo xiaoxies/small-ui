@@ -3,16 +3,22 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import {sDatePicker} from "./date-picker";
 
 function install (_vue){
     _vue.component(sButton.name,sButton);
+    _vue.component(sDatePicker.name,sDatePicker);
 }
 
 
+export {
+    sButton,
+    sDatePicker
+}
+
 export default{
     version:"1.0",
-    install,
-    sButton
+    install
 };
 
 
