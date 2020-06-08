@@ -10,7 +10,7 @@
     export default {
         data(){
           return {
-            date:new Date()
+            date:new Date().getTime()+3600*24*30*1000
           }
         }
     }

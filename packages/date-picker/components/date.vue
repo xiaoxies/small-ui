@@ -1,6 +1,7 @@
 <template>
     <div v-click-out-side class="small-date-row">
         <input type="text" v-model="date">
+        {{dayList}}
         <div v-if="show" class="small-date">
             <div class="small-date-panel-header">
 
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+    import {getDate,getDayTime} from "../../utils/common";
     export default {
         directives:{
             clickOutSide:{
@@ -38,11 +40,26 @@
             props:"value",
             event:"update::value"
         },
-        props:["value"],
+        props:{
+            value:Date|String,
+            format:{
+                type:String,
+                default:"yyyy-mm-dd"
+            }
+        },
         computed:{
+            dayList(){
+                let arr=[];
+                const {year,month,days,week,time}=getDayTime(this.value);
+                const firstDay = new Date(year,month-1,1); //获取选择的日期的第一天
+                const startDay = new Date(firstDay.getTime()-3600*24*1000*firstDay.getDay());
+                for(let i=0;i<42;i++){
+                    arr.push(getDayTime(startDay.getTime()+1000*3600*24*i))
+                }
+                return arr;
+            },
             date(){
-                let date=new Date(this.value);
-                let day=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+                let day=getDate(this.value,this.format);
                 this.$emit("update::value",day);
                 return day;
             }
