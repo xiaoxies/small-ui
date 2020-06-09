@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     {{date}}
+
     <s-date-picker v-model="date"></s-date-picker>
   </div>
 </template>
@@ -10,7 +11,7 @@
     export default {
         data(){
           return {
-            date:new Date().getTime()+3600*24*30*1000
+            date:""
           }
         }
     }
