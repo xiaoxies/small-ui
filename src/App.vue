@@ -2,7 +2,7 @@
   <div id="app">
     {{date}}
 
-    <s-date-picker v-model="date"></s-date-picker>
+    <s-date-picker v-model="date" ></s-date-picker>
   </div>
 </template>
 
@@ -11,8 +11,11 @@
     export default {
         data(){
           return {
-            date:""
+            date:new Date()
           }
+        },
+        methods:{
+
         }
     }
 </script>

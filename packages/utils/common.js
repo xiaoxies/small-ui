@@ -19,13 +19,13 @@ function getDate(time=new Date(),format){
         .replace('mm',months)
         .replace('dd',days)
         .replace('hh',hours)
-        .replace('mm',minutes)
+        .replace('ii',minutes)
         .replace('ss',senconds)
         .replace('w',week)
         .replace('d',day)
         .replace('m',month)
         .replace('h',hour)
-        .replace('m',minute)
+        .replace('i',minute)
         .replace('s',sencond)
 
 }
