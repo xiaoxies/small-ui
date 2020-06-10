@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    {{date}}
-
-    <s-date-picker v-model="date" ></s-date-picker>
+    <div style="width:200px;">
+      {{text}}
+      <s-input placeholder="请输入内容" v-model="text"></s-input>
+      
+    </div>
   </div>
 </template>
 
 <script>
-
     export default {
         data(){
           return {
-            date:new Date()
+            date:new Date(),
+            text:"我是文本"
           }
+        },
+        created(){
+            console.log(typeof new Date());
         },
         methods:{
 

@@ -37,11 +37,11 @@
             },
             type:{
                 type:String,
-                default:"default"
+                default:"big"
             },
             size:{
                 type:String,
-                default:"medium"
+                big:"medium"
             }
         },
         methods:{
@@ -60,7 +60,7 @@
     .small-button i{margin-right:5px;}
     .small-button-is-round{border-radius: 20px;}
 
-    .small-button-size-default{padding: 12px 20px;}
+    .small-button-size-big{padding: 12px 20px;}
     .small-button-size-medium{padding: 10px 20px;}
     .small-button-size-small{padding: 9px 15px;font-size:12px;}
     .small-button-size-mini{padding: 7px 20px;font-size:12px;}
@@ -69,14 +69,14 @@
     .small-button-text:active{color: #3a8ee6;outline: none;}
     .small-button-is-text-disabled,.small-button-is-text-disabled:hover,.small-button-is-text-disabled:active{color:#c0c4cc;cursor: not-allowed;}
 
-    .small-button-default{color: #606266;background: #fff;}
-    .small-button-default:hover{color: #409eff;border-color: #c6e2ff;background-color: #ecf5ff;}
-    .small-button-default:active{color: #3a8ee6;border-color: #3a8ee6;outline: none;}
-    .small-button-plain-default{border: 1px solid #dcdfe6;color: #606266;background: #fff;}
-    .small-button-plain-default:hover{    background: #fff;border-color: #409eff;color: #409eff;}
-    .small-button-plain-default:active{border-color: #3a8ee6;    color: #3a8ee6;}
-    .small-button-is-default-disabled,.small-button-is-default-disabled:disabled,.small-button-is-default-disabled:hover,.small-button-is-default-disabled:active{color: #c0c4cc;cursor: not-allowed;background-image: none; background-color: #fff;border-color: #ebeef5;}
-    .small-button-is-plain-default-disabled,.small-button-is-plain-default-disabled:disabled,.small-button-is-plain-default-disabled:hover,.small-button-is-plain-default-disabled:active{color: #c0c4cc;cursor: not-allowed;background-image: none; background-color: #fff;border-color: #ebeef5;}
+    .small-button-big{color: #606266;background: #fff;}
+    .small-button-big:hover{color: #409eff;border-color: #c6e2ff;background-color: #ecf5ff;}
+    .small-button-big:active{color: #3a8ee6;border-color: #3a8ee6;outline: none;}
+    .small-button-plain-big{border: 1px solid #dcdfe6;color: #606266;background: #fff;}
+    .small-button-plain-big:hover{    background: #fff;border-color: #409eff;color: #409eff;}
+    .small-button-plain-big:active{border-color: #3a8ee6;    color: #3a8ee6;}
+    .small-button-is-big-disabled,.small-button-is-big-disabled:disabled,.small-button-is-big-disabled:hover,.small-button-is-big-disabled:active{color: #c0c4cc;cursor: not-allowed;background-image: none; background-color: #fff;border-color: #ebeef5;}
+    .small-button-is-plain-big-disabled,.small-button-is-plain-big-disabled:disabled,.small-button-is-plain-big-disabled:hover,.small-button-is-plain-big-disabled:active{color: #c0c4cc;cursor: not-allowed;background-image: none; background-color: #fff;border-color: #ebeef5;}
 
 
     .small-button-primary{border: 1px solid #409eff;color: #fff;background: #409eff;}

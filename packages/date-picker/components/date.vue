@@ -1,6 +1,6 @@
 <template>
     <div v-click-out-side class="small-date-row">
-        <input type="text" v-model="date">
+        <s-input v-model="value"  :readonly="true"></s-input>
         <transition>
             <div v-show="show" class="small-date">
                 <div class="small-date-header">
@@ -61,11 +61,13 @@
         },
         name: "sDatePicker",
         model:{
-            props:"value",
+            props:['value'],
             event:"update::value"
         },
         props:{
-            value:Date|String,
+            value:{
+                type:[Date,String]
+            },
             render:{
                 type:Function,
                 default:(item)=>{
@@ -81,6 +83,9 @@
         },
         created(){
             const day=getDayTime(this.value||new Date());
+            if(this.value){
+                this.$emit("update::value",getDate(this.value,this.format));
+            }
             this.myDate=day;
         },
         computed:{
@@ -171,7 +176,7 @@
             dayClick(item){
                 let day=new Date(item.year,item.month-1,item.day,item.hour,item.minute,item.sencond)
                 this.myDate=getDayTime(day);
-                this.$emit("update::value",day);
+                this.$emit("update::value",getDate(day,this.format));
                 setTimeout(()=>{
                     this.blur();
                 },0)
@@ -193,7 +198,7 @@
 
     .small-date-row{position: relative;width:100%;}
     .small-date{
-        position: absolute;top:45px;width:322px;
+        position: absolute;top:55px;width:322px;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);background: #fff;
         border-radius: 4px;padding:10px 15px;    color: #606266;border: 1px solid #e4e7ed;
         .small-date-header{
