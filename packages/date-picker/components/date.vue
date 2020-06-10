@@ -127,8 +127,8 @@
                     case 2:
                         if(isTrue){
                             const day=getDayTime(new Date(
-                                this.myDate.month==11?this.myDate.year+1:this.myDate.year,
-                                this.myDate.month==11?0:this.myDate.month,
+                                this.myDate.month==12?this.myDate.year+1:this.myDate.year,
+                                this.myDate.month==12?0:this.myDate.month,
                                 this.myDate.day,
                                 this.myDate.hour,
                                 this.myDate.minute,
