@@ -37,6 +37,7 @@
 
 <script>
     import {getDate,getDayTime} from "../../utils/common";
+    import {inputMixins} from "../../utils/mixins";
     export default {
         directives:{
             clickOutSide:{
@@ -60,10 +61,7 @@
             }
         },
         name: "sDatePicker",
-        model:{
-            props:['value'],
-            event:"update::value"
-        },
+        mixins:[inputMixins],
         props:{
             value:{
                 type:[Date,String]

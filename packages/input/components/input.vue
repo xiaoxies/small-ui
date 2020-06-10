@@ -4,6 +4,8 @@
                 :value="value"
                 type="text"
                 @input="onInput"
+                @focus="onFocus"
+                @blur="onBlur"
                 ref="input"
                 :placeholder="placeholder"
                 :disabled="disabled"
@@ -13,19 +15,17 @@
                     'small-input-'+size,
                 ]"
         >
-        <div class="small-input-clear" v-if="showClearIcon" @click="clearHandler">
+        <div class="small-input-clear" v-if="showClearIcon" @click="clearHandler" @mousedown.prevent>
             <i class="iconfont icon-cuowuguanbiquxiao-xianxingyuankuang"></i>
         </div>
     </div>
 </template>
 
 <script>
+    import {inputMixins} from "../../utils/mixins";
     export default {
         name:"sInput",
-        model:{
-            props:"value",
-            event:"update::value"
-        },
+        mixins:[inputMixins],
         props:{
             value:[Date,String],
             clear:{
@@ -47,20 +47,33 @@
             placeholder:String
         },
         data() {
-            return {}
+            return {
+                showClear:false
+            }
         },
         computed:{
             showClearIcon(){
-                return this.clear && !this.disabled && !this.readonly && this.value!==''
+                return this.clear && !this.disabled && !this.readonly && this.value!==''&&this.showClear
             }
         },
         methods:{
             clearHandler(){
                 this.$emit("update::value","");
-                this.$refs.input.focus();
+                this.$emit("input","");
+                this.$emit("clear","");
+                //this.$refs.input.focus();
+            },
+            onFocus(e){
+                this.showClear=true;
+                this.$emit("focus",e);
+            },
+            onBlur(e){
+                this.showClear=false;
+                this.$emit("blur",e);
             },
             onInput(e){
                 this.$emit("update::value",e.target.value);
+                this.$emit("input",e)
             }
         }
     }
