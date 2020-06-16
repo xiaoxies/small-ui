@@ -3,12 +3,14 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sRadio from "./radio";
 import sInput from "./input";
 import {sDatePicker} from "./date-picker";
 
 function install (_vue){
     _vue.component(sButton.name,sButton);
     _vue.component(sInput.name,sInput);
+    _vue.component(sRadio.name,sRadio);
     _vue.component(sDatePicker.name,sDatePicker);
 }
 

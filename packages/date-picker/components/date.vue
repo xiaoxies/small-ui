@@ -102,7 +102,6 @@
                     day=getDate(this.value,this.format);
                     this.$emit("update::value",day);
                 }
-
                 return day;
             }
         },

@@ -41,7 +41,7 @@
             },
             size:{
                 type:String,
-                big:"medium"
+                default:"medium"
             }
         },
         methods:{

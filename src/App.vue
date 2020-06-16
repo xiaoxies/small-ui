@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div style="width:200px;">
-      {{text}}
-      <s-input placeholder="请输入内容" v-model="text"></s-input>
+    <div style="width:400px;">
       
     </div>
   </div>
