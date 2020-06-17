@@ -15,6 +15,7 @@
 <script>
     export default {
         name: "sButton",
+        componentName:"sButton",
         props:{
             icon:String,
             disabled:{

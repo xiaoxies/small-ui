@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <div style="width:400px;">
-      
+    <div style="width:100%;">
+        <s-checkbox-group v-model="value">
+            <s-checkbox label="0" disabled>女</s-checkbox>
+        </s-checkbox-group>
+
+        <s-radio disabled>545454545454</s-radio>
     </div>
   </div>
 </template>
@@ -10,12 +14,8 @@
     export default {
         data(){
           return {
-            date:new Date(),
-            text:"我是文本"
+            value:["0"]
           }
-        },
-        created(){
-            console.log(typeof new Date());
         },
         methods:{
 

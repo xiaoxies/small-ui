@@ -46,6 +46,7 @@
     import {inputMixins} from "../../utils/mixins";
     export default {
         name:"sInput",
+        componentName:"sInput",
         mixins:[inputMixins],
         props:{
             value:[Date,String],

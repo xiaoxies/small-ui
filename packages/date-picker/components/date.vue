@@ -61,6 +61,7 @@
             }
         },
         name: "sDatePicker",
+        componentName:"sDatePicker",
         mixins:[inputMixins],
         props:{
             value:{
