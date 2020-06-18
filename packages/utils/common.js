@@ -48,7 +48,7 @@ function getDayTime(times=new Date()){
     let senconds = ('0' + date.getSeconds()).substr(-2);
     let time = date.getTime();
     return {
-        year,month,months,day,days,week,hour,hours,minute,minutes,sencond,senconds,time
+        year,month,months,day,days,week,hour,hours,minute,minutes,sencond,senconds,time,date
     }
 }
 

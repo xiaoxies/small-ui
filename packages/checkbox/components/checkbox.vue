@@ -10,7 +10,7 @@
     >
             <span class="small_checkbox_span">
                 <span class="small-checkbox-inner"></span>
-                <input class="small-checkbox-input" ref="checkbox" :value="label" @change="onChange"  type="checkbox" >
+                <input class="small-checkbox-input" :disabled="disabled"  :value="label" @change="onChange"  type="checkbox" >
             </span>
         <span class="small-checkbox-font"><slot></slot></span>
     </label>
@@ -24,7 +24,7 @@
         mixins:[inputMixins],
         props:{
             label:String,
-            value:String,
+            value:String|Boolean,
             border:{
                 type:Boolean,
                 default:false
@@ -50,7 +50,7 @@
                         return true;
                     }
                 }
-                return false;
+                return this.value;
             },
             isGroup(){
                 let parent=this.$parent;
@@ -70,9 +70,10 @@
                 if(this.isGroup){
                     this.dispatch(this._checkboxGroup,'update',e.target.value);
                 }else{
-                    throw new Error("复选框必须有s-checkbox-group父组件")
+                    //throw new Error("复选框必须有s-checkbox-group父组件")
+                    this.$emit("update::value",!this.value);
+                    this.$emit("change",!this.value);
                 }
-
             }
         }
     }

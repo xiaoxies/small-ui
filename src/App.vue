@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <div style="width:100%;">
-        <s-checkbox-group v-model="value">
-            <s-checkbox label="0" disabled>女</s-checkbox>
-        </s-checkbox-group>
-
-        <s-radio disabled>545454545454</s-radio>
+        <s-switch v-model="checked" openColor="#13ce66" ></s-switch>
     </div>
   </div>
 </template>
@@ -14,11 +10,13 @@
     export default {
         data(){
           return {
-            value:["0"]
+            checked:false,
           }
         },
         methods:{
-
+          clickHandel(){
+            this.checked=!this.checked;
+          }
         }
     }
 </script>

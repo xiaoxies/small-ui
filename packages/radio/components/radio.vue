@@ -2,7 +2,7 @@
     <label
             :class="[
                 'small-label-radio',
-                value&&value==label?(border?'small-radio-checked small-radio-bordered':'small-radio-checked'):'',
+                model&&model==label?(border?'small-radio-checked small-radio-bordered':'small-radio-checked'):'',
                 'small-radio-size-'+size,
                 {'small-radio-border':border},
                 {'small-radio-disabled':disabled}
@@ -10,7 +10,7 @@
     >
             <span class="small_radio_span">
                 <span class="small-radio-inner"></span>
-                <input class="small-radio-input" :value="label" @change="onChange" type="radio" v-model="value">
+                <input class="small-radio-input" :value="label" :disabled="disabled" @change="onChange" type="radio" v-model="model">
             </span>
         <span class="small-radio-font"><slot></slot></span>
     </label>
@@ -38,12 +38,43 @@
                 default:"medium"
             }
         },
+        computed:{
+            isGroup(){
+                let parent=this.$parent;
+                while (parent) {
+                    if (parent.$options.componentName !== 'sRadioGroup') {
+                        parent = parent.$parent;
+                    } else {
+                        this._RadioGroup = parent;
+                        return true;
+                    }
+                }
+                return false;
+            },
+            model:{
+                get(){
+                    return this.isGroup ? this._RadioGroup.value : this.value;
+                },
+                set(){
+                    if(this.isGroup){
+                        this.dispatch(this._RadioGroup,'update',this.label)
+                    }else{
+                        this.$emit("update::value",this.label)
+                    }
+                }
+            }
+        },
         data() {
             return {}
         },
         methods:{
             onChange(e){
-                this.$emit("update::value",this.label)
+                if(this.isGroup){
+                    this.dispatch(this._RadioGroup,'update',this.label)
+                }else{
+                    this.$emit("update::value",this.label)
+                }
+
             }
         }
     }
