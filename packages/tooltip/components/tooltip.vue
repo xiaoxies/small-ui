@@ -56,7 +56,7 @@
                     document.addEventListener("mouseover",el.handler)
                 },
                 unbind(el){
-                    document.removeEventListener("click",el.handler)
+                    document.removeEventListener("mouseover",el.handler)
                 }
             }
         },
