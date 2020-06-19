@@ -3,6 +3,10 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sRow from "./row";
+import sIcon from "./icon";
+import sAlert from "./alert";
+import sTooltip from "./tooltip";
 import sSwitch from "./switch";
 import {sRadio,sRadioGroup} from "./radio";
 import {sCheckbox,sCheckboxGroup} from "./checkbox";
@@ -11,6 +15,10 @@ import {sDatePicker} from "./date-picker";
 
 function install (_vue){
     _vue.component(sButton.name,sButton);
+    _vue.component(sRow.name,sRow);
+    _vue.component(sIcon.name,sIcon);
+    _vue.component(sAlert.name,sAlert);
+    _vue.component(sTooltip.name,sTooltip);
     _vue.component(sSwitch.name,sSwitch);
     _vue.component(sInput.name,sInput);
     _vue.component(sRadio.name,sRadio);
@@ -23,7 +31,11 @@ function install (_vue){
 
 export {
     sButton,
+    sAlert,
+    sIcon,
+    sRow,
     sSwitch,
+    sTooltip,
     sInput,
     sDatePicker,
     sCheckboxGroup,

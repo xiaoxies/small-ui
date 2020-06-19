@@ -55,7 +55,7 @@
 
 <style scoped lang="less">
 
-    .small-button{transition: all 0.1s;font-size: 14px; border-radius: 4px;cursor: pointer;outline: none;border: 1px solid #dcdfe6;}
+    .small-button{transition: all 0.1s;font-size: 14px; border-radius: 4px;cursor: pointer;outline: none;border: 1px solid #dcdfe6;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
     .small-button+.small-button{margin-left:10px;}
     .small-button-text+.small-button-text{margin-left:10px;}
     .small-button i{margin-right:5px;}

@@ -82,6 +82,7 @@
 <style scoped lang="less">
 
     .small-label-checkbox{
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         color: #606266;font-weight: 500;line-height: 1;position: relative;box-sizing: border-box;
         cursor: pointer; display: inline-block; white-space: nowrap;outline: none;font-size: 14px;margin-right: 30px;
         .small_checkbox_span{

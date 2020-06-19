@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <div style="width:100%;">
-
-    </div>
+  <div id="app" >
+    
   </div>
 </template>
 
@@ -10,13 +8,11 @@
     export default {
         data(){
           return {
-            checked:false,
+            date:new Date()
           }
         },
         methods:{
-          clickHandel(){
-            this.checked=!this.checked;
-          }
+
         }
     }
 </script>

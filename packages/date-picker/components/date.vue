@@ -1,6 +1,6 @@
 <template>
     <div v-click-out-side class="small-date-row">
-        <s-input v-model="value"  :readonly="true"></s-input>
+        <s-input prefix-icon="icon-rili" v-model="value"  :readonly="true"></s-input>
         <transition>
             <div v-show="show" class="small-date">
                 <div class="small-date-header">
@@ -74,6 +74,10 @@
                                 <span class="${item.is_active&&item.is_month?'day_active':''}">${item.day}</span>
                             </div>`
                 }
+            },
+            multiple:{
+                type:Boolean,
+                default:false
             },
             format:{
                 type:String,
@@ -196,6 +200,7 @@
 
     .small-date-row{position: relative;width:100%;}
     .small-date{
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         position: absolute;top:55px;width:322px;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);background: #fff;
         border-radius: 4px;padding:10px 15px;    color: #606266;border: 1px solid #e4e7ed;
