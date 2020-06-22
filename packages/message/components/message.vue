@@ -13,7 +13,7 @@
             <i class="small-message-icon iconfont icon-xinxi-yuankuang" v-if="type=='info'"></i>
             <i class="small-message-icon iconfont icon-gantanhao-yuankuang" v-if="type=='warning'"></i>
             <i class="small-message-icon iconfont icon-cuowuguanbiquxiao-yuankuang" v-if="type=='danger'"></i>
-            <div class="small-message-content">{{message}}</div>
+            <div class="small-message-content" v-html="message"></div>
 
             <div class="small-message-close" v-if="showClose" @click="close"><i class="iconfont icon-cuowuguanbiquxiao"></i></div>
         </div>
