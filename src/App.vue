@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-
+    <s-button size="mini" type="primary" @click="show">开始</s-button>
   </div>
 </template>
 
@@ -12,26 +12,11 @@
           }
         },
         created(){
-          this.$message.danger("错误了");
-          setTimeout(()=>{
-            this.$message({
-              type:"info",
-              message:"fddfdf",
-              duration:0
-            });
-          },500)
-          setTimeout(()=>{
-            this.$message.primary("错误了");
-          },1000)
-          setTimeout(()=>{
-            this.$message.warning("错误了");
-          },1500)
-          setTimeout(()=>{
-            this.$message.success("错误了");
-          },2000)
         },
         methods:{
-
+          show(){
+            this.$message.success("错误了");
+          }
         }
     }
 </script>

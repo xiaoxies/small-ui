@@ -1,12 +1,14 @@
 <template>
     <transition name="message-fade">
         <div
-            v-if="visible"
+            v-show="visible"
             :class="[
                'small-message',
                'small-message-'+type
             ]"
-            :style="'top:'+top"
+            :style="style"
+            @mouseenter="clearTimer"
+            @mouseleave="show"
         >
             <i class="small-message-icon iconfont icon-lingdang" v-if="type=='primary'"></i>
             <i class="small-message-icon iconfont icon-zhengquewancheng-yuankuang" v-if="type=='success'"></i>
@@ -30,20 +32,27 @@
                 type:"info",
                 message:"",
                 duration:3000,
-                top:"20px",
+                top:20,
                 showClose:false
+            }
+        },
+        computed:{
+            style(){
+                return `top:${this.top}px`;
             }
         },
         methods:{
             show(){
-                this.visible=true;
                 if(this.duration==0){
                     this.showClose=true;
                     return
                 }
-                setTimeout(()=>{
+                this.timer=setTimeout(()=>{
                     this.close();
                 },this.duration)
+            },
+            clearTimer(){
+                clearTimeout(this.timer);
             },
             close(){
                 this.visible = false
@@ -69,8 +78,9 @@
         transform: translate(-50%, -100%);
     }
     .small-message{
-        position: fixed;left:50%;min-width:380px;padding:10px;border-radius: 4px;padding-left:18px;transition:opacity .3s,transform .4s,top .4s;transform: translateX(-50%);
-        display:flex;align-items: center;justify-content: flex-start;z-index:888;top:20px;box-sizing: border-box;
+        position: fixed;left:50%;min-width:380px;padding:10px;border-radius: 4px;padding-left:18px;transform: translateX(-50%);transition: opacity 0.3s, transform .4s, top 0.4s;
+        overflow: hidden;
+        display:flex;align-items: center;justify-content: flex-start;z-index:888;box-sizing: border-box;top: 20px;
     }
     .small-message-content{font-size:14px;}
     .small-message-icon{font-size:20px;margin-right:15px;}
