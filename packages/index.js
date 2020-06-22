@@ -3,6 +3,7 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sMessage from "./message";
 import sRow from "./row";
 import sIcon from "./icon";
 import sAlert from "./alert";
@@ -26,10 +27,12 @@ function install (_vue){
     _vue.component(sCheckbox.name,sCheckbox);
     _vue.component(sCheckboxGroup.name,sCheckboxGroup);
     _vue.component(sDatePicker.name,sDatePicker);
+    _vue.prototype.$message=sMessage;
 }
 
 
 export {
+    sMessage,
     sButton,
     sAlert,
     sIcon,
