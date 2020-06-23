@@ -23,7 +23,7 @@
 
                     <!--    当类型是prompt的时候显示            -->
                     <div class="small-message-prompt"  v-if="prompt">
-                        <div class="small-message-prompt-text" v-html="promptTitle"></div>
+                        <div class="small-message-prompt-text" v-html="tips"></div>
                         <s-input v-model="value"></s-input>
                     </div>
 
@@ -54,7 +54,7 @@
                 confirmButtomText:"确定",
                 confirmButtomType:"primary",
                 cancelButtomText:"取消",
-                promptTitle:"",
+                tips:"",
                 cancelButtomType:"default",
                 confirm:false,
                 prompt:false,
