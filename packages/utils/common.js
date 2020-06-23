@@ -52,10 +52,15 @@ function getDayTime(times=new Date()){
     }
 }
 
+let num=1000;
+function getZIndex(){
+    return num++;
+}
 
 
 
 export {
+    getZIndex,
     getDate,
     getDayTime
 }

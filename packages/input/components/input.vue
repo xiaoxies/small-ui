@@ -120,9 +120,8 @@
 
 <style scoped lang="less">
     .small-input-row{width:100%;position: relative;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
-    .small-input{ position: relative;display:inline-table;}
+    .small-input{ position: relative;display:inline-table;width:100%;}
     .small-input__inner{
-
         -webkit-appearance: none;background-color: #fff;cursor: pointer;
         background-image: none;border-radius: 4px;
         border: 1px solid #dcdfe6;box-sizing: border-box;

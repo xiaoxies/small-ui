@@ -4,6 +4,7 @@
 import "./font/iconfont.css";
 import sButton from "./button";
 import sMessage from "./message";
+import sMessageBox from "./message-box";
 import sRow from "./row";
 import sIcon from "./icon";
 import sAlert from "./alert";
@@ -28,6 +29,9 @@ function install (_vue){
     _vue.component(sCheckboxGroup.name,sCheckboxGroup);
     _vue.component(sDatePicker.name,sDatePicker);
     _vue.prototype.$message=sMessage;
+    _vue.prototype.$alert=sMessageBox.alert;
+    _vue.prototype.$confirm=sMessageBox.confirm;
+    _vue.prototype.$prompt=sMessageBox.prompt;
 }
 
 

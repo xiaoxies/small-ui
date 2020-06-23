@@ -1,6 +1,7 @@
 <template>
   <div id="app" >
     <s-button size="mini" type="primary" @click="show">开始</s-button>
+
   </div>
 </template>
 
@@ -15,7 +16,7 @@
         },
         methods:{
           show(){
-            this.$message.success("错误了");
+           
           }
         }
     }

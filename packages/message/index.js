@@ -1,4 +1,5 @@
 import Message from "./components/message";
+import {getZIndex} from "../utils/common";
 import Vue from "vue";
 
 const messageController = Vue.extend(Message);
@@ -20,22 +21,15 @@ const sMessage = (options)=>{
     const MessageInstance = new messageController({
         data:options
     })
-
-
     MessageInstance.id = id;
     MessageInstance.$mount(); // 挂载但是并未插入dom，
     document.body.appendChild(MessageInstance.$el);
-    console.log(MessageInstance,"===========");
-
-
     messageList.forEach((item)=>{
         top+=item.$el.offsetHeight+20;
     })
-
-    //将top传给组件里面的top更改dom元素的top位置
-    MessageInstance.top=top
     MessageInstance.visible=true;
-    MessageInstance.$el.style.zIndex=1000+uid;
+    MessageInstance.$el.style.zIndex=getZIndex();
+    MessageInstance.top=top
     messageList.push(MessageInstance);
     return MessageInstance
 }

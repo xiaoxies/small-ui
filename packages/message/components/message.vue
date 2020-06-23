@@ -73,14 +73,11 @@
 
 <style scoped lang="less">
 
-    .message-fade-enter, .message-fade-leave-active /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-        transform: translate(-50%, -100%);
-    }
+
     .small-message{
         position: fixed;left:50%;min-width:380px;padding:10px;border-radius: 4px;padding-left:18px;transform: translateX(-50%);transition: opacity 0.3s, transform .4s, top 0.4s;
         overflow: hidden;
-        display:flex;align-items: center;justify-content: flex-start;z-index:888;box-sizing: border-box;top: 20px;
+        display:flex;align-items: center;justify-content: flex-start;z-index:888;box-sizing: border-box;top: 0px;
     }
     .small-message-content{font-size:14px;}
     .small-message-icon{font-size:20px;margin-right:15px;}
@@ -91,5 +88,33 @@
     .small-message-danger{background-color: #fef0f0;color: #f56c6c;}
     .small-message-warning{background-color: #fdf6ec;color: #e6a23c;}
     .small-message-primary{background:#ecf5ff;color:#409eff;}
+    .message-fade-enter-active {
+        animation: message-fade-in .3s;
+    }
 
+    .message-box-leave-active {
+        animation: message-fade-out .3s;
+    }
+
+    @keyframes message-fade-in {
+        0% {
+            transform: translate3d(-50%, -20px, 0);
+            opacity: 0;
+        }
+        100% {
+            transform: translate3d(-50%, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes message-fade-out {
+        0% {
+            transform: translate3d(-50%, 0, 0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate3d(-50%, -20px, 0);
+            opacity: 0;
+        }
+    }
 </style>
