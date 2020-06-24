@@ -3,6 +3,7 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import {sLoading,$loading} from "./loading";
 import sMessage from "./message";
 import sMessageBox from "./message-box";
 import sRow from "./row";
@@ -18,6 +19,7 @@ import {sDatePicker} from "./date-picker";
 function install (_vue){
     _vue.component(sButton.name,sButton);
     _vue.component(sRow.name,sRow);
+    _vue.component(sLoading.name,sLoading);
     _vue.component(sIcon.name,sIcon);
     _vue.component(sAlert.name,sAlert);
     _vue.component(sTooltip.name,sTooltip);
@@ -32,6 +34,7 @@ function install (_vue){
     _vue.prototype.$alert=sMessageBox.alert;
     _vue.prototype.$confirm=sMessageBox.confirm;
     _vue.prototype.$prompt=sMessageBox.prompt;
+    _vue.prototype.$loading=$loading;
 }
 
 
