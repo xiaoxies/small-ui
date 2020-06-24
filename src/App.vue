@@ -1,6 +1,8 @@
 <template>
   <div id="app" >
-    <s-button size="mini" type="primary" @click="show">开始</s-button>
+    <div class="slide">
+      <s-slide></s-slide>
+    </div>
   </div>
 </template>
 
@@ -16,24 +18,17 @@
         },
         methods:{
           show(){
-            const loading=this.$loading({
-              text:"开始了..."
-            })
-            setTimeout(()=>{
-              loading.setText("倒计时4");
-            },1000)
-            setTimeout(()=>{
-              loading.setText("倒计时3");
-            },2000)
-            setTimeout(()=>{
-              loading.setText("倒计时2");
-            },3000)
-            setTimeout(()=>{
-              loading.setText("倒计时1");
-            },4000)
-            setTimeout(()=>{
-              loading.close();
-            },5000)
+            this.$prompt({
+              title:"我是标题",
+              content:"我是内容",
+              tips:"请输入邮箱11111111",
+              success:()=>{
+
+              },
+              cancel:()=>{
+
+              }
+            });
           }
         }
     }
@@ -43,4 +38,5 @@
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
     #app{padding:20px;padding-top:200px;}
+    .slide{width:50%;height:400px;border:1px solid #ccc;margin:0 auto;}
 </style>

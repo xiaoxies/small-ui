@@ -84,7 +84,7 @@
     .small-message-close{position: absolute;right:0px;height:100%;display:flex;align-items: center;justify-content: center;width:40px;cursor: pointer;}
 
     .small-message-info{background-color: #f4f4f5;color: #909399;}
-    .small-message-success{background-color: #f0f9eb;color: #67c23a;;}
+    .small-message-success{background-color: #f0f9eb;color: #67c23a;}
     .small-message-danger{background-color: #fef0f0;color: #f56c6c;}
     .small-message-warning{background-color: #fdf6ec;color: #e6a23c;}
     .small-message-primary{background:#ecf5ff;color:#409eff;}

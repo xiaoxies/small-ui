@@ -3,6 +3,7 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sSlide from "./slide";
 import {sLoading,$loading} from "./loading";
 import sMessage from "./message";
 import sMessageBox from "./message-box";
@@ -18,6 +19,7 @@ import {sDatePicker} from "./date-picker";
 
 function install (_vue){
     _vue.component(sButton.name,sButton);
+    _vue.component(sSlide.name,sSlide);
     _vue.component(sRow.name,sRow);
     _vue.component(sLoading.name,sLoading);
     _vue.component(sIcon.name,sIcon);
