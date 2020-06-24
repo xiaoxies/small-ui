@@ -4,6 +4,11 @@ import Vue from "vue";
 const loadingController = Vue.extend(sLoading);
 let uid=0;
 
+
+sLoading.install=function(Vue){
+    Vue.component(sLoading.name, sLoading)
+}
+
 const $loading = (options)=>{
     let id = 'message-' + uid++;
     options.show=true;
