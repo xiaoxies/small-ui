@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-
+    
   </div>
 </template>
 
@@ -11,8 +11,6 @@
             date:new Date(),
             shows:false
           }
-        },
-        created(){
         },
         methods:{
           show(){

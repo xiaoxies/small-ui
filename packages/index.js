@@ -3,11 +3,13 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import {sDropdown,sDropdownItem,sDropdownMenu} from "./dropdown";
 import sCard from "./card";
 import sCol from "./col";
 import sNotify from "./notify";
 import sSlide from "./slide";
 import {sLoading,$loading} from "./loading";
+import {sBreadcrumb,sBreadcrumbItem} from "./breadcrumb";
 import sMessage from "./message";
 import sMessageBox from "./message-box";
 import sRow from "./row";
@@ -21,6 +23,11 @@ import sInput from "./input";
 import {sDatePicker} from "./date-picker";
 
 function install (_vue){
+    _vue.component(sBreadcrumb.name,sBreadcrumb);
+    _vue.component(sBreadcrumbItem.name,sBreadcrumbItem);
+    _vue.component(sDropdown.name,sDropdown);
+    _vue.component(sDropdownItem.name,sDropdownItem);
+    _vue.component(sDropdownMenu.name,sDropdownMenu);
     _vue.component(sButton.name,sButton);
     _vue.component(sSlide.name,sSlide);
     _vue.component(sRow.name,sRow);
@@ -49,6 +56,11 @@ function install (_vue){
 export {
     sCard,
     sMessage,
+    sBreadcrumbItem,
+    sBreadcrumb,
+    sDropdownMenu,
+    sDropdownItem,
+    sDropdown,
     sNotify,
     sMessageBox,
     sLoading,
