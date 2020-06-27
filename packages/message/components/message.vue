@@ -33,7 +33,8 @@
                 message:"",
                 duration:3000,
                 top:20,
-                showClose:false
+                showClose:false,
+                closed:true
             }
         },
         computed:{
@@ -48,7 +49,9 @@
                     return
                 }
                 this.timer=setTimeout(()=>{
-                    this.close();
+                    if(this.closed){
+                        this.close();
+                    }
                 },this.duration)
             },
             clearTimer(){
@@ -56,6 +59,7 @@
             },
             close(){
                 this.visible = false
+                this.closed=false;
                 if(this.onClose){
                     this.onClose(this);
                 }

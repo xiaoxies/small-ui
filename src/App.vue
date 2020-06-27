@@ -1,8 +1,6 @@
 <template>
   <div id="app" >
-    <div class="slide">
-      <s-slide></s-slide>
-    </div>
+
   </div>
 </template>
 
@@ -18,16 +16,10 @@
         },
         methods:{
           show(){
-            this.$prompt({
-              title:"我是标题",
-              content:"我是内容",
-              tips:"请输入邮箱11111111",
-              success:()=>{
-
-              },
-              cancel:()=>{
-
-              }
+            this.$notify({
+              title:"我是标题11",
+              content:"登录成功",
+              type:"success",
             });
           }
         }

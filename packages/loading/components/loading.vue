@@ -40,7 +40,7 @@
                 this.show=false;
                 setTimeout(()=>{
                     this.$destroy(true);
-                    this.$el.parentNode.removeChild(this.$el);
+                    this.$el.parentNode.removeChild(this.$el) // 从DOM里将这个组件移除
                 },500)
             }
         }

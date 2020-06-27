@@ -3,6 +3,7 @@
 ```
     作者: 小谢
     时间: 2020-06-05
+    参考element-ui和其他UI库整理的自己一套UI
 ```
 
 ## Project setup

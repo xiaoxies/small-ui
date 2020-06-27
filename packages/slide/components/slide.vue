@@ -4,7 +4,7 @@
             <i class="iconfont icon-shangyiyehoutuifanhui"></i>
         </div>
 
-        <ul class="small-slide-ul" :style="style">
+        <ul class="small-slide-ul" :style="style" ref="slide">
             <li class="small-slide-li" style="background:#909399;">1</li>
             <li class="small-slide-li" style="background:#67c23a;">2</li>
             <li class="small-slide-li" style="background:#f56c6c;">3</li>
@@ -34,7 +34,8 @@
         },
         methods:{
             nextPage(){
-                this.current++
+                this.current++;
+
             },
             prevPage(){
                 this.current--

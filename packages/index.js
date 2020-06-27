@@ -3,6 +3,9 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sCard from "./card";
+import sCol from "./col";
+import sNotify from "./notify";
 import sSlide from "./slide";
 import {sLoading,$loading} from "./loading";
 import sMessage from "./message";
@@ -21,6 +24,8 @@ function install (_vue){
     _vue.component(sButton.name,sButton);
     _vue.component(sSlide.name,sSlide);
     _vue.component(sRow.name,sRow);
+    _vue.component(sCol.name,sCol);
+    _vue.component(sCard.name,sCard);
     _vue.component(sLoading.name,sLoading);
     _vue.component(sIcon.name,sIcon);
     _vue.component(sAlert.name,sAlert);
@@ -37,15 +42,21 @@ function install (_vue){
     _vue.prototype.$confirm=sMessageBox.confirm;
     _vue.prototype.$prompt=sMessageBox.prompt;
     _vue.prototype.$loading=$loading;
+    _vue.prototype.$notify=sNotify;
 }
 
 
 export {
+    sCard,
     sMessage,
+    sNotify,
+    sMessageBox,
+    sLoading,
     sButton,
     sAlert,
     sIcon,
     sRow,
+    sCol,
     sSwitch,
     sTooltip,
     sInput,
