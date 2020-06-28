@@ -28,6 +28,8 @@
                         if(el.contains(e.target)){
                             if(!vnode.context.visible){
                                 vnode.context.show();
+                            }else{
+                                vnode.context.hide();
                             }
                         }else{
                            vnode.context.hide();
