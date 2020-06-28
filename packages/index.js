@@ -5,6 +5,7 @@ import "./font/iconfont.css";
 import sButton from "./button";
 import {sDropdown,sDropdownItem,sDropdownMenu} from "./dropdown";
 import sCard from "./card";
+import sBadge from "./badge";
 import sCol from "./col";
 import sNotify from "./notify";
 import sSlide from "./slide";
@@ -23,6 +24,7 @@ import sInput from "./input";
 import {sDatePicker} from "./date-picker";
 
 function install (_vue){
+    _vue.component(sBadge.name,sBadge);
     _vue.component(sBreadcrumb.name,sBreadcrumb);
     _vue.component(sBreadcrumbItem.name,sBreadcrumbItem);
     _vue.component(sDropdown.name,sDropdown);
@@ -55,6 +57,7 @@ function install (_vue){
 
 export {
     sCard,
+    sBadge,
     sMessage,
     sBreadcrumbItem,
     sBreadcrumb,

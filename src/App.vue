@@ -1,6 +1,14 @@
 <template>
   <div id="app" >
-    
+    <s-badge :value="99" :max="100">
+      <s-button type="primary" size="small">开始了吗</s-button>
+    </s-badge>
+
+    <div style="padding:20px;">
+      <s-badge is-dot>
+        <s-button type="primary" size="small">开始了吗</s-button>
+      </s-badge>
+    </div>
   </div>
 </template>
 
