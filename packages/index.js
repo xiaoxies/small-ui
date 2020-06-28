@@ -2,31 +2,33 @@
 // 2020-06-05
 
 import "./font/iconfont.css";
-import sButton from "./button";
-import sTag from "./tag";
 import {sCollapseItem,sCollapse} from "./collapse";
+import {sBreadcrumb,sBreadcrumbItem} from "./breadcrumb";
 import {sDropdown,sDropdownItem,sDropdownMenu} from "./dropdown";
+import {sRadio,sRadioGroup} from "./radio";
+import {sCheckbox,sCheckboxGroup} from "./checkbox";
+import {sDatePicker} from "./date-picker";
+import {sLoading,$loading} from "./loading";
 import sCard from "./card";
 import sBadge from "./badge";
 import sCol from "./col";
-import sNotify from "./notify";
 import sSlide from "./slide";
-import {sLoading,$loading} from "./loading";
-import {sBreadcrumb,sBreadcrumbItem} from "./breadcrumb";
-import sMessage from "./message";
-import sMessageBox from "./message-box";
+import sButton from "./button";
+import sBacktop from "./backtop";
+import sTag from "./tag";
 import sRow from "./row";
 import sIcon from "./icon";
 import sAlert from "./alert";
 import sTooltip from "./tooltip";
 import sSwitch from "./switch";
-import {sRadio,sRadioGroup} from "./radio";
-import {sCheckbox,sCheckboxGroup} from "./checkbox";
 import sInput from "./input";
-import {sDatePicker} from "./date-picker";
+import sMessage from "./message";
+import sMessageBox from "./message-box";
+import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sTag.name,sTag);
+    _vue.component(sBacktop.name,sBacktop);
     _vue.component(sCollapseItem.name,sCollapseItem);
     _vue.component(sCollapse.name,sCollapse);
     _vue.component(sBadge.name,sBadge);
@@ -62,18 +64,16 @@ function install (_vue){
 
 export {
     sCard,
+    sBacktop,
     sTag,
     sCollapse,
     sCollapseItem,
     sBadge,
-    sMessage,
     sBreadcrumbItem,
     sBreadcrumb,
     sDropdownMenu,
     sDropdownItem,
     sDropdown,
-    sNotify,
-    sMessageBox,
     sLoading,
     sButton,
     sAlert,
@@ -87,7 +87,10 @@ export {
     sCheckboxGroup,
     sCheckbox,
     sRadio,
-    sRadioGroup
+    sRadioGroup,
+    sMessage,
+    sNotify,
+    sMessageBox,
 }
 
 export default{

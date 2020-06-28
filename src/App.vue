@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-      
+
   </div>
 </template>
 
@@ -29,6 +29,6 @@
 <style lang="less">
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
-    #app{padding:20px;padding-top:200px;}
+    #app{padding:20px;padding-top:200px;height:200vh;}
     .slide{width:50%;height:400px;border:1px solid #ccc;margin:0 auto;}
 </style>
