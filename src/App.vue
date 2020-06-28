@@ -1,6 +1,12 @@
 <template>
   <div id="app" >
-      
+      <s-button type="primary" icon="icon-cuowuguanbiquxiao-yuankuang" circle></s-button>
+      <s-button type="warning" icon="icon-cuowuguanbiquxiao-yuankuang" circle></s-button>
+      <s-modal v-model="show" width="600px" title="我是第一个modal" >
+        <div style="height:100px;">
+          我是内容
+        </div>
+      </s-modal>
   </div>
 </template>
 
@@ -8,7 +14,7 @@
     export default {
         data(){
           return {
-            show:true
+            show:false
           }
         },
         methods:{

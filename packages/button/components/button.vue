@@ -4,7 +4,8 @@
         'small-button-'+(plain?'plain-'+type:type),
         'small-button-size-'+size,
         (disabled||loading)?'small-button-is-'+(plain?'plain-'+type:type)+'-disabled':'',
-        round?'small-button-is-round':''
+        round?'small-button-is-round':'',
+        circle?'small-button-is-circle':''
     ]">
         <i v-if="loading" class="iconfont icon-loading-A"></i>
         <i v-if="icon&&!loading" :class="['iconfont', icon]"></i>
@@ -25,6 +26,10 @@
                 type:Boolean,
             },
             plain:{
+                type:Boolean,
+                default:false
+            },
+            circle:{
                 type:Boolean,
                 default:false
             },
@@ -128,4 +133,6 @@
     .small-button-is-success-disabled,.small-button-is-success-disabled:disabled,.small-button-is-success-disabled:hover,.small-button-is-success-disabled:active{cursor: not-allowed;color: #fff;background-color: #b3e19d;border-color: #b3e19d;}
     .small-button-is-plain-success-disabled,.small-button-is-plain-success-disabled:disabled,.small-button-is-plain-success-disabled:hover,.small-button-is-plain-success-disabled:active{color: #a4da89;cursor: not-allowed;background-image: none; background-color: #f0f9eb;border-color: #e1f3d8;}
 
+
+    .small-button-is-circle{padding:10px;border-radius: 50%;i{margin:0px;}}
 </style>
