@@ -10,6 +10,7 @@ import {sCheckbox,sCheckboxGroup} from "./checkbox";
 import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
 import sCard from "./card";
+import sPopover from "./popover";
 import sModal from "./modal";
 import sBadge from "./badge";
 import sCol from "./col";
@@ -29,6 +30,7 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sTag.name,sTag);
+    _vue.component(sPopover.name,sPopover);
     _vue.component(sModal.name,sModal);
     _vue.component(sBacktop.name,sBacktop);
     _vue.component(sCollapseItem.name,sCollapseItem);
@@ -66,6 +68,7 @@ function install (_vue){
 
 export {
     sCard,
+    sPopover,
     sBacktop,
     sModal,
     sTag,

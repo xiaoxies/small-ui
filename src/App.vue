@@ -1,12 +1,8 @@
 <template>
-  <div id="app" >
-      <s-button type="primary" icon="icon-cuowuguanbiquxiao-yuankuang" circle></s-button>
-      <s-button type="warning" icon="icon-cuowuguanbiquxiao-yuankuang" circle></s-button>
-      <s-modal v-model="show" width="600px" title="我是第一个modal" >
-        <div style="height:100px;">
-          我是内容
-        </div>
-      </s-modal>
+  <div id="app">
+    <s-popover title="第一个" position="top" content="我是内容">
+      <s-button type="primary" size="big">开始了吧</s-button>
+    </s-popover>
   </div>
 </template>
 
@@ -37,6 +33,6 @@
 <style lang="less">
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
-    #app{padding:20px;padding-top:200px;height:200vh;}
+    #app{padding:200px;text-align:center;position: relative;}
     .slide{width:50%;height:400px;border:1px solid #ccc;margin:0 auto;}
 </style>
