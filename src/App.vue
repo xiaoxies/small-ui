@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-    
+      
   </div>
 </template>
 
@@ -13,7 +13,7 @@
         },
         methods:{
           handleChange(name){
-
+            console.log(name);
           },
           show(){
             this.$notify({

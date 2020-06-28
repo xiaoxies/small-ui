@@ -3,6 +3,7 @@
 
 import "./font/iconfont.css";
 import sButton from "./button";
+import sTag from "./tag";
 import {sCollapseItem,sCollapse} from "./collapse";
 import {sDropdown,sDropdownItem,sDropdownMenu} from "./dropdown";
 import sCard from "./card";
@@ -25,6 +26,7 @@ import sInput from "./input";
 import {sDatePicker} from "./date-picker";
 
 function install (_vue){
+    _vue.component(sTag.name,sTag);
     _vue.component(sCollapseItem.name,sCollapseItem);
     _vue.component(sCollapse.name,sCollapse);
     _vue.component(sBadge.name,sBadge);
@@ -60,6 +62,7 @@ function install (_vue){
 
 export {
     sCard,
+    sTag,
     sCollapse,
     sCollapseItem,
     sBadge,
