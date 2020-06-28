@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <s-popover title="第一个" position="top" content="我是内容">
+    <s-popover title="第一个" position="right" content="我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容">
       <s-button type="primary" size="big">开始了吧</s-button>
     </s-popover>
   </div>

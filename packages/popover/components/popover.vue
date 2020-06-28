@@ -6,7 +6,7 @@
                 <div :class="[
                     'small-popover-body',
                     'small-popover-position-'+position
-                ]" ref="popover" v-if="visible" :style="Object.assign({},{'width':width+'px'},style)">
+                ]" ref="popover" v-show="visible" :style="Object.assign({},{'width':width+'px'},style)">
                     <div class="small-popover-header" v-if="title">{{title}}</div>
                     <div class="small-popover-content" v-html="content"></div>
                     <div class="small-popover-arrow"></div>
@@ -29,43 +29,6 @@
                             if(!vnode.context.visible){
                                 vnode.context.show();
                             }
-                            let parentWidth=el.offsetWidth;
-                            let parentHeight=el.offsetHeight;
-                            if(!vnode.context.$refs.popover){
-                                return
-                            }
-                            let width=vnode.context.$refs.popover.offsetWidth;
-                            let height=vnode.context.$refs.popover.offsetHeight
-                            console.log(height,parentHeight);
-                            let style={};
-                            switch(vnode.context.position){
-                                case 'top':
-                                    style={
-                                        left:-(vnode.context.width-parentWidth)/2+"px",
-                                        bottom:parentHeight+15+"px"
-                                    }
-                                    break;
-                                case 'right':
-                                    style={
-                                        left:parentWidth+15+"px",
-                                        bottom:-(height-parentHeight)/2+"px"
-                                    }
-                                    break;
-                                case 'bottom':
-                                    style={
-                                        left:-(vnode.context.width-parentWidth)/2+"px",
-                                        bottom:-(height+15)+"px"
-                                    }
-                                    break;
-                                case 'left':
-                                    style={
-                                        left:-width-15+"px",
-                                        bottom:-(height-parentHeight)/2+"px"
-                                    }
-                                    break;
-                            }
-                            vnode.context.style=style;
-
                         }else{
                            vnode.context.hide();
                         }
@@ -102,6 +65,41 @@
         methods:{
             show(){
                 this.visible=true;
+                this.$nextTick(()=>{
+                    console.log(this.$el.offsetHeight,this.$refs.popover.offsetHeight);
+                    let parentWidth=this.$el.offsetWidth;
+                    let parentHeight=this.$el.offsetHeight;
+                    let width=this.$refs.popover.offsetWidth;
+                    let height=this.$refs.popover.offsetHeight
+                    let style={};
+                    switch(this.position){
+                        case 'top':
+                            style={
+                                left:-(this.width-parentWidth)/2+"px",
+                                bottom:parentHeight+15+"px"
+                            }
+                            break;
+                        case 'right':
+                            style={
+                                left:parentWidth+15+"px",
+                                bottom:-(height-parentHeight)/2+"px"
+                            }
+                            break;
+                        case 'bottom':
+                            style={
+                                left:-(this.width-parentWidth)/2+"px",
+                                bottom:-(height+15)+"px"
+                            }
+                            break;
+                        case 'left':
+                            style={
+                                left:-width-15+"px",
+                                bottom:-(height-parentHeight)/2+"px"
+                            }
+                            break;
+                    }
+                    this.style=style;
+                })
                 this.$emit("show");
             },
             hide(){
@@ -170,11 +168,11 @@
     .popover-enter-active {animation: popover-in .3s; }
     .popover-leave-active { animation: popover-out .3s;}
     @keyframes popover-in {
-        0% {opacity: 0; }
-        100% {opacity: 1;}
+        0% {opacity: 0; transform: translate3d(0%, -20px, 0);}
+        100% {opacity: 1;transform: translate3d(0%, 0px, 0);}
     }
     @keyframes popover-out {
-        0% {opacity: 1;}
-        100% {opacity: 0;}
+        0% {opacity: 1;transform: translate3d(0%, 0px, 0);}
+        100% {opacity: 0;transform: translate3d(0%, -20px, 0);}
     }
 </style>
