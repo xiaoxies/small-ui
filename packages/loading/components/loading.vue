@@ -1,6 +1,9 @@
 <template>
     <transition name="loading">
-        <div class="small-loading" v-show="show" :style="'background:'+background+';z-index:'+zIndex">
+        <div class="small-loading" v-show="show" :style="{
+            'background':background,
+            'z-index':zIndex
+        }">
             <i class="small-loading-icon iconfont icon-loading-A"  :style="'color:'+color"></i>
             <div class="small-loading-tips" :style="'color:'+color" v-html="text"></div>
         </div>

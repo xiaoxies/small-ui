@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-
+      
   </div>
 </template>
 
@@ -8,19 +8,21 @@
     export default {
         data(){
           return {
-            activeNames:"4"
+            show:true
           }
         },
         methods:{
-          handleChange(name){
-            console.log(name);
+          shows(){
+              this.show=!this.show;
           },
-          show(){
-            this.$notify({
-              title:"我是标题11",
-              content:"登录成功",
-              type:"success",
-            });
+          close(done){
+            this.$confirm({
+              title:"温馨提示",
+              content:"确认关闭吗?",
+              success(){
+                done();
+              }
+            })
           }
         }
     }
