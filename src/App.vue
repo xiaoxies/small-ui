@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-      
+    <s-container>
+      <s-aside width="200">Aside</s-aside>
+      <s-container>
+        <s-header>Header</s-header>
+        <s-main>Main</s-main>
+        <s-footer>Footer</s-footer>
+      </s-container>
+    </s-container>
   </div>
 </template>
 
@@ -8,7 +15,8 @@
     export default {
         data(){
           return {
-            show:false
+            show:false,
+            name:"1"
           }
         },
         methods:{
@@ -31,6 +39,5 @@
 <style lang="less">
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
-    #app{padding:200px;text-align:center;position: relative;}
-    .slide{width:50%;height:400px;border:1px solid #ccc;margin:0 auto;}
+    #app{flex:1;width:100%;display:flex;}
 </style>
