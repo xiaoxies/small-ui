@@ -66,10 +66,10 @@
     .small-button i{margin-right:5px;}
     .small-button-is-round{border-radius: 20px;}
 
-    .small-button-size-big{padding: 10px 22px;}
-    .small-button-size-medium{padding: 10px 22px;}
-    .small-button-size-small{padding: 9px 16px;font-size:12px;}
-    .small-button-size-mini{padding: 7px 16px;font-size:12px;}
+    .small-button-size-big{padding: 9px 20px;}
+    .small-button-size-medium{padding: 9px 20px;}
+    .small-button-size-small{padding: 7px 14px;font-size:12px;}
+    .small-button-size-mini{padding: 5px 14px;font-size:12px;}
 
     .small-button-text{border-color: transparent;color: #409eff;background: transparent;padding-left: 0;padding-right: 0;}
     .small-button-text:active{color: #3a8ee6;outline: none;}

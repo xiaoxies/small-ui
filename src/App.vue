@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <s-popover title="第一个" position="right" trigger="click" content="我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容">
-      <s-button type="primary" size="big">开始了吧</s-button>
-    </s-popover>
+      
   </div>
 </template>
 
@@ -14,8 +12,8 @@
           }
         },
         methods:{
-          shows(){
-              this.show=!this.show;
+          sure(){
+            console.log("你点击了确定");
           },
           close(done){
             this.$confirm({
