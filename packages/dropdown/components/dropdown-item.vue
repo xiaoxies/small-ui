@@ -1,6 +1,9 @@
 <template>
     <li
         @click="clickHandel"
+        :style="{
+            'width':(100/sDropdownMenu.col)+'%'
+        }"
        :class="[
             'small-dropdown-item',
             disabled?'small-dropdown-item-disabled':''
@@ -14,7 +17,7 @@
     export default {
         name: "sDropdownItem",
         componentName:"sDropdownItem",
-        inject: ['sDropdown'],
+        inject: ['sDropdown','sDropdownMenu'],
         props:{
             row:String|Object|Array|Number,
             name:String,
@@ -33,7 +36,7 @@
 
 <style scoped lang="less">
     .small-dropdown-item{
-        font-size:14px;color: #606266;text-align:center;line-height:35px;cursor: pointer;
+        font-size:14px;color: #606266;text-align:center;line-height:35px;cursor: pointer;width:100%;
         &:hover{
             background-color: #ecf5ff;
             color: #66b1ff;

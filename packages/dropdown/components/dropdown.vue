@@ -35,7 +35,7 @@
                             }
                         }else{
                             if(vnode.context.show){
-                                vnode.context.close();
+                               vnode.context.close();
                             }
                         }
                     };

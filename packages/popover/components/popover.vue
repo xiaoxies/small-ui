@@ -8,7 +8,10 @@
                     'small-popover-position-'+position
                 ]" ref="popover" v-show="visible" :style="Object.assign({},{'width':width+'px'},style)">
                     <div class="small-popover-header" v-if="title">{{title}}</div>
-                    <div class="small-popover-content" v-html="content"></div>
+                    <div class="small-popover-content" >
+                        <div v-if="!$slots.content" v-html="content"></div>
+                        <slot name="content"></slot>
+                    </div>
                     <div class="small-popover-arrow"></div>
                 </div>
             </transition>
@@ -29,7 +32,10 @@
                             if(!vnode.context.visible){
                                 vnode.context.show();
                             }else{
-                                vnode.context.hide();
+                                if(el.trigger=="click"){
+                                    vnode.context.hide();
+                                }
+
                             }
                         }else{
                            vnode.context.hide();
@@ -78,24 +84,24 @@
                         case 'top':
                             style={
                                 left:-(this.width-parentWidth)/2+"px",
-                                bottom:parentHeight+15+"px"
+                                bottom:parentHeight+10+"px"
                             }
                             break;
                         case 'right':
                             style={
-                                left:parentWidth+15+"px",
+                                left:parentWidth+10+"px",
                                 bottom:-(height-parentHeight)/2+"px"
                             }
                             break;
                         case 'bottom':
                             style={
                                 left:-(this.width-parentWidth)/2+"px",
-                                bottom:-(height+15)+"px"
+                                bottom:-(height+10)+"px"
                             }
                             break;
                         case 'left':
                             style={
-                                left:-width-15+"px",
+                                left:-width-10+"px",
                                 bottom:-(height-parentHeight)/2+"px"
                             }
                             break;
@@ -121,7 +127,7 @@
         display:inline-block;position: relative;
     }
     .small-popover-body{
-        position: absolute;min-width:240px;background:#fff;border: 1px solid rgba(0,0,0,.2);box-sizing: border-box;
+        position: absolute;background:#fff;border: 1px solid rgba(0,0,0,.2);box-sizing: border-box;
         box-shadow: 0 5px 10px rgba(0,0,0,.2);border-radius: 6px;bottom:0px;left:0px;
         .small-popover-header{
             border-bottom: 1px solid #ebebeb;background-color: #f7f7f7;font-size:14px;

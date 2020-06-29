@@ -10,6 +10,7 @@ import {sCheckbox,sCheckboxGroup} from "./checkbox";
 import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
 import sCard from "./card";
+import sDrawer from "./drawer";
 import sAside from "./aside";
 import sHeader from "./header";
 import sContainer from "./container";
@@ -36,6 +37,7 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sTag.name,sTag);
+    _vue.component(sDrawer.name,sDrawer);
     _vue.component(sAside.name,sAside);
     _vue.component(sMain.name,sMain);
     _vue.component(sHeader.name,sHeader);
