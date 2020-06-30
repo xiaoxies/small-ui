@@ -9,6 +9,7 @@ import {sRadio,sRadioGroup} from "./radio";
 import {sCheckbox,sCheckboxGroup} from "./checkbox";
 import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
+import {sTimelineItem,sTimeline} from "./timeline";
 import sCard from "./card";
 import sDrawer from "./drawer";
 import sAside from "./aside";
@@ -37,6 +38,8 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sTag.name,sTag);
+    _vue.component(sTimelineItem.name,sTimelineItem);
+    _vue.component(sTimeline.name,sTimeline);
     _vue.component(sDrawer.name,sDrawer);
     _vue.component(sAside.name,sAside);
     _vue.component(sMain.name,sMain);
@@ -81,6 +84,8 @@ function install (_vue){
 
 
 export {
+    sTimeline,
+    sTimelineItem,
     sCard,
     sAside,
     sHeader,

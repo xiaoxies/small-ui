@@ -1,6 +1,6 @@
 <template>
     <li
-        @click="clickHandel"
+        @click.self="clickHandel"
         :style="{
             'width':(100/sDropdownMenu.col)+'%'
         }"
@@ -36,7 +36,7 @@
 
 <style scoped lang="less">
     .small-dropdown-item{
-        font-size:14px;color: #606266;text-align:center;line-height:35px;cursor: pointer;width:100%;
+        font-size:12px;color: #606266;text-align:center;line-height:35px;cursor: pointer;width:100%;
         &:hover{
             background-color: #ecf5ff;
             color: #66b1ff;

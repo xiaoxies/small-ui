@@ -3,7 +3,7 @@
         'small-card',
         'small-card-'+type
     ]">
-        <div class="small-card-header">
+        <div class="small-card-header" v-if="$slots.header">
             <slot name="header"></slot>
         </div>
         <div class="small-card-body" :style="'padding:'+padding">

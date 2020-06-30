@@ -1,9 +1,11 @@
 <template>
-    <ul class="small-dropdown-menu" :style="{width}">
-        <slot></slot>
-        <div class="small-dropdown-zanwu" v-if="!$slots.default">暂无</div>
-        <i class="iconfont icon-biaotou-zhengxu small-dropdown-top"></i>
-    </ul>
+    <div class="small-dropdown-padding">
+        <ul class="small-dropdown-menu" :style="{width}">
+            <slot></slot>
+            <div class="small-dropdown-zanwu" v-if="!$slots.default">暂无</div>
+            <!--        <i class="iconfont icon-biaotou-zhengxu small-dropdown-top"></i>-->
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -13,7 +15,7 @@
         props:{
             width:{
                 type:String,
-                default:"100%"
+                default:"80px"
             },
             col:{
                 type:String|Number,
@@ -30,6 +32,7 @@
 
 <style scoped lang="less">
     .small-dropdown-menu,small-dropdown-menu *{list-style:none;box-sizing: border-box;}
+    .small-dropdown-padding{padding:10px;}
     .small-dropdown-menu{
         width:100%;display:flex;flex-wrap: wrap;align-items: flex-start;justify-content: flex-start;
         background-color: #fff;border-radius: 4px;transition: all 0.3s;padding:10px;
