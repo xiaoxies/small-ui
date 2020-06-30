@@ -1,18 +1,6 @@
 <template>
   <div id="app">
-      <s-timeline>
-          <s-timeline-item title="标题1" time="2018-12-11 10:12:14" >
-                <s-card padding="15px">
-                    个打个大哥
-                </s-card>
-          </s-timeline-item>
-          <s-timeline-item title="标题2" time="2018-12-11 10:12:14">
-
-          </s-timeline-item>
-          <s-timeline-item title="标题3" time="2018-12-11 10:12:14">
-
-          </s-timeline-item>
-      </s-timeline>
+      <s-progress :percentage="chang" height="10px" :text-inside="true" type="warning" circle></s-progress>
   </div>
 </template>
 
@@ -20,11 +8,17 @@
     export default {
         data(){
           return {
-
+              chang:22
           }
         },
         mounted(){
-
+            let timer=setInterval(()=>{
+                if(this.chang>=100){
+                    clearInterval(timer);
+                }else{
+                    this.chang+=3;
+                }
+            },500)
         }
     }
 </script>

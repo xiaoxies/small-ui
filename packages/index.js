@@ -13,6 +13,7 @@ import {sTimelineItem,sTimeline} from "./timeline";
 import sCard from "./card";
 import sDrawer from "./drawer";
 import sAside from "./aside";
+import sProgress from "./progress";
 import sHeader from "./header";
 import sContainer from "./container";
 import sFooter from "./footer";
@@ -38,6 +39,7 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sTag.name,sTag);
+    _vue.component(sProgress.name,sProgress);
     _vue.component(sTimelineItem.name,sTimelineItem);
     _vue.component(sTimeline.name,sTimeline);
     _vue.component(sDrawer.name,sDrawer);
@@ -84,6 +86,7 @@ function install (_vue){
 
 
 export {
+    sProgress,
     sTimeline,
     sTimelineItem,
     sCard,
