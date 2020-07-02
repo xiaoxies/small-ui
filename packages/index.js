@@ -10,6 +10,7 @@ import {sCheckbox,sCheckboxGroup} from "./checkbox";
 import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
 import {sTimelineItem,sTimeline} from "./timeline";
+import {sSteps,sStepsItem} from "./steps";
 import sCard from "./card";
 import sDrawer from "./drawer";
 import sAside from "./aside";
@@ -38,6 +39,8 @@ import sMessageBox from "./message-box";
 import sNotify from "./notify";
 
 function install (_vue){
+    _vue.component(sSteps.name,sSteps);
+    _vue.component(sStepsItem.name,sStepsItem);
     _vue.component(sTag.name,sTag);
     _vue.component(sProgress.name,sProgress);
     _vue.component(sTimelineItem.name,sTimelineItem);
@@ -86,6 +89,8 @@ function install (_vue){
 
 
 export {
+    sStepsItem,
+    sSteps,
     sProgress,
     sTimeline,
     sTimelineItem,
