@@ -24,6 +24,7 @@ import sPopover from "./popover";
 import sModal from "./modal";
 import sBadge from "./badge";
 import sCol from "./col";
+import sRate from "./rate";
 import sSlide from "./slide";
 import sButton from "./button";
 import sBacktop from "./backtop";
@@ -66,6 +67,7 @@ function install (_vue){
     _vue.component(sButton.name,sButton);
     _vue.component(sSlide.name,sSlide);
     _vue.component(sRow.name,sRow);
+    _vue.component(sRate.name,sRate);
     _vue.component(sCol.name,sCol);
     _vue.component(sCard.name,sCard);
     _vue.component(sLoading.name,sLoading);
@@ -89,6 +91,7 @@ function install (_vue){
 
 
 export {
+    sRate,
     sStepsItem,
     sSteps,
     sProgress,
