@@ -35,7 +35,6 @@
                                 if(el.trigger=="click"){
                                     vnode.context.hide();
                                 }
-
                             }
                         }else{
                            vnode.context.hide();

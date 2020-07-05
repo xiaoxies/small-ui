@@ -1,10 +1,13 @@
 <template>
-    <div class="small-rate">
+    <div class="small-rate" >
         <i :class="{
             'iconfont':true,
             [item.icon]: !item.active,
             [item.activeIcon] : item.active
-        }" v-for="(item,index) in list" :key="index"></i>
+        }" v-for="(item,index) in list" :style="{
+            'color':item.color
+        }" @mouseover="moveActive(item,index)" @click="setValue(item,index)" @mouseleave="leaveActive(item,index)" :key="index"></i>
+        <span class="small-rate-text">{{text}}</span>
     </div>
 </template>
 
@@ -15,26 +18,87 @@
         componentName:"sRate",
         mixins:[inputMixins],
         props:{
+            value:Number,
             max:{type:Number,default:5},
             icon:{type:String,default:"icon-shoucang-xianxing"},
             activeIcon:{type:String,default:"icon-shoucang"},
-            activeColor:{type:String|Object,default:"#f7ba2a"},
+            activeColor:{type:String,default:"#f7ba2a"},
+            color:{type:String|Object,default:"#c0c4cc"},
+            data:Object,
+            showText:{type:Boolean,default:false}
         },
         data(){
             return {
-                list:[]
+                list:[],
+                text:""
             }
         },
         created(){
             this.list=[];
             for(let i=1;i<=this.max;i++){
+                let active=false;
+                let color=this.color;
+                if(this.value && this.value!==0 && i<=this.value){
+                    active=true
+                    color=this.activeColor;
+                }
                 this.list.push({
                     index:i,
-                    active:false,
+                    active:active,
                     icon:this.icon,
                     activeIcon:this.activeIcon,
-                    activeColor:this.activeColor
+                    color:color
                 })
+            }
+            this.computedText(this.value);
+        },
+        methods:{
+            computedText(value){
+                if(value==""||!value||value==0){
+                    return
+                }
+                let str="";
+                if(this.data){
+
+                }else{
+                    let arr=['极差','失望','一般','满意','十分满意'];
+                    if(value == this.list.length){
+                        str = arr[arr.length-1];
+                    }else{
+                        str = arr[parseInt(value/(this.list.length/arr.length))];
+                    }
+
+                }
+                this.text=str;
+            },
+            setValue(item,index){
+                this.$emit("update::value",item.index);
+                this.computedText(item.index);
+            },
+            leaveActive(item,index){
+                this.list=this.list.map((row,index)=>{
+                    if(row.index<=this.value){
+                        row.active=true
+                        row.color=this.activeColor
+                    }else{
+                        row.active=false
+                        row.color=this.color;
+                    }
+                    return row;
+                })
+            },
+            moveActive(item,index){
+                this.list=this.list.map((row,index)=>{
+                    if(row.index<=item.index){
+                        row.active=true
+                        row.color=this.activeColor
+                    }else{
+                        row.active=false
+                        row.color=this.color;
+                    }
+                    return row;
+                })
+                this.computedText(item.index);
             }
         }
     }
@@ -43,5 +107,6 @@
 <style scoped lang="less">
     .small-rate,.small-rate *{box-sizing: border-box;}
     .small-rate{display:flex;justify-content: flex-start;align-items: flex-start;flex-wrap: wrap;cursor: pointer;}
-    .small-rate i {margin-right:5px;color:#c0c4cc;font-size:18px;}
+    .small-rate i {padding-right:5px;color:#c0c4cc;font-size:18px;transition: all 0.3s;}
+    .small-rate-text{font-size:14px;padding-top:1px;}
 </style>
