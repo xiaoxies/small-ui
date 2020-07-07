@@ -28,6 +28,7 @@ import sRate from "./rate";
 import sSlide from "./slide";
 import sButton from "./button";
 import sBacktop from "./backtop";
+import sUpload from "./upload";
 import sTag from "./tag";
 import sRow from "./row";
 import sIcon from "./icon";
@@ -41,6 +42,7 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sSteps.name,sSteps);
+    _vue.component(sUpload.name,sUpload);
     _vue.component(sStepsItem.name,sStepsItem);
     _vue.component(sTag.name,sTag);
     _vue.component(sProgress.name,sProgress);
@@ -91,6 +93,7 @@ function install (_vue){
 
 
 export {
+    sUpload,
     sRate,
     sStepsItem,
     sSteps,

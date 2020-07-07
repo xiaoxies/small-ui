@@ -10,6 +10,8 @@
         <i v-if="loading" class="iconfont icon-loading-A"></i>
         <i v-if="icon&&!loading" :class="['iconfont', icon]"></i>
         <slot></slot>
+
+        <input type="file" v-if="htmlType=='file'" :accept="accept" @change="fileChange" class="small-button-file" :multiple="multiple">
     </button>
 </template>
 
@@ -18,6 +20,8 @@
         name: "sButton",
         componentName:"sButton",
         props:{
+            multiple:{type:Boolean,default:false},
+            accept:{type:String,default:"image/*"},
             icon:String,
             disabled:{
                 type:Boolean,
@@ -53,14 +57,17 @@
         methods:{
             handleClick(e){
                 this.$emit("click",e);
+            },
+            fileChange(e){
+                this.$emit("change",e);
             }
         }
     }
 </script>
 
 <style scoped lang="less">
-
-    .small-button{transition: all 0.1s;font-size: 14px; border-radius: 4px;cursor: pointer;outline: none;border: 1px solid #dcdfe6;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+    .small-button-file{position: absolute;top:0px;left:0px;right:0px;bottom:0px;width:100%;height:100%;opacity:0;}
+    .small-button{transition: all 0.1s;font-size: 14px; border-radius: 4px;cursor: pointer;outline: none;border: 1px solid #dcdfe6;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;position: relative;}
     .small-button+.small-button{margin-left:10px;}
     .small-button-text+.small-button-text{margin-left:10px;}
     .small-button i{margin-right:5px;}

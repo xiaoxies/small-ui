@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-      {{value}}
-      <div style="width:700px;margin:0 auto;margin-top:100px;">
-          <s-rate v-model="value" readonly :max="5" show-text></s-rate>
-      </div>
+    <div style="padding:200px;">
+      <s-upload ></s-upload>
+    </div>
   </div>
 </template>
 
@@ -15,13 +14,9 @@
           }
         },
         methods:{
-            clickHandel(){
-                if(this.chang==4){
-                    this.chang=1;
-                }else{
-                    this.chang++;
-                }
-            }
+          onchange(e){
+            console.log(e.target.files,"===========");
+          }
         }
     }
 </script>
