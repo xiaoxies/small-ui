@@ -2,7 +2,7 @@
   <div id="app">
       {{value}}
       <div style="width:700px;margin:0 auto;margin-top:100px;">
-          <s-rate v-model="value" :max="50"  show-text></s-rate>
+          <s-rate v-model="value" readonly :max="5" show-text></s-rate>
       </div>
   </div>
 </template>
@@ -11,10 +11,7 @@
     export default {
         data(){
           return {
-              value:1,
-              data:{
-
-              }
+              value:4
           }
         },
         methods:{
