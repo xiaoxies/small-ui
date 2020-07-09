@@ -8,7 +8,7 @@
             }">
                 <img :src="item.url" alt="">
                 <div class="small-upload-loading">
-                    <s-icon color="#fff" type="icon-anzhuangshigong" size="22px"></s-icon>
+                    <s-icon color="#fff" type="icon-xianshikejian" size="22px"></s-icon>
                     <s-icon color="#fff" type="icon-xiazaidaoru" size="22px" @click="download(item,index)"></s-icon>
                     <s-icon color="#fff" type="icon-cuowuguanbiquxiao-yuankuang" size="22px"></s-icon>
                 </div>
