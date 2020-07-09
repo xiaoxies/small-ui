@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <div style="padding:200px;">
-      <s-upload ></s-upload>
+    <div style="padding:200px;width:1000px;">
+      <s-upload @change="onchange" type="card" v-model="value" >
+        <div style="font-size:12px;">只能上传png格式</div>
+      </s-upload>
     </div>
   </div>
 </template>
@@ -10,12 +12,13 @@
     export default {
         data(){
           return {
-              value:4
+            value:[]
+              //value:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594290322572&di=08215bad5f1e5d6cba47bb8e05c7dcdd&imgtype=0&src=http%3A%2F%2Ffriendoprod.blob.core.windows.net%2Fmissionpics%2FEDM%2F20140519%2Fa99c0451-2701-4617-bb3a-a919d05fb0cc.jpg"
           }
         },
         methods:{
           onchange(e){
-            console.log(e.target.files,"===========");
+            this.value.push({name:e.name,url:e.base64});
           }
         }
     }

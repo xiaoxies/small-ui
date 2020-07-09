@@ -57,10 +57,85 @@ function getZIndex(){
     return num++;
 }
 
+//图片文件压缩
+function compileImage(file){
+    let name=file.name;
+    let type=file.type;
+    return new Promise((resolve, reject)=>{
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        var img = document.createElement('img');
+        reader.onload = function (e) {
+               let quality = 0.8; //图像质量
+               let canvas = document.createElement("canvas");
+               let drawer = canvas.getContext("2d");
 
+            img.src=e.target.result;
+            img.onload=function(){
+                canvas.width = img.width;
+                canvas.height = img.height;
+                drawer.fillStyle = "#fff";
+                drawer.fillRect(0, 0, canvas.width, canvas.height);
+                drawer.drawImage(img, 0, 0, canvas.width, canvas.height);
+                let imageData = drawer.getImageData(0, 0, canvas.width, canvas.height); //将背景颜色从黑色转换为白色
+                for(var i = 0; i < imageData.data.length; i += 4) {
+                    // 当该像素是透明的，则设置成白色
+                    if(imageData.data[i + 3] == 0) {
+                        imageData.data[i] = 255;
+                        imageData.data[i + 1] = 255;
+                        imageData.data[i + 2] = 255;
+                        imageData.data[i + 3] = 255;
+                    }
+                }
+                drawer.putImageData(imageData, 0, 0);
+
+                const base64 = canvas.toDataURL('image/jpeg', 0.75);
+                var arr = base64.split(',');
+                let mime = arr[0].match(/:(.*?);/)[1];
+                let bstr = atob(arr[1]);
+                let n = bstr.length;
+                let u8arr = new Uint8Array(n);
+                while(n--){
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                resolve({
+                    base64,
+                    file:new File([u8arr], name, {type:type}),
+                    name,
+                    type
+                });
+            }
+
+        }
+    })
+
+}
+
+//获取文件的base64
+function noCompile(file){
+    let name=file.name;
+    let type=file.type;
+    return new Promise((resolve, reject)=>{
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        var img = document.createElement('img');
+        reader.onload = function (e) {
+            resolve({
+                base64:e.target.result,
+                file:new File([u8arr], name, {type:type}),
+                name,
+                type
+            });
+
+        }
+    })
+
+}
 
 export {
     getZIndex,
     getDate,
-    getDayTime
+    getDayTime,
+    compileImage,
+    noCompile
 }

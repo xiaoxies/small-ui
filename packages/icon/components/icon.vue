@@ -1,5 +1,6 @@
 <template>
     <i
+        @click="clickHander"
        class="small-icon"
        :class="['iconfont',type]"
        :style="{
@@ -23,6 +24,11 @@
                 type:String,
                 default:'#606266'
             },
+        },
+        methods:{
+            clickHander(){
+                this.$emit("click",...arguments);
+            }
         }
     }
 </script>
