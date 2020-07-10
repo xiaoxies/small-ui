@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <s-checkbox v-model="value" >1111</s-checkbox>
+    <s-cascader></s-cascader>
   </div>
 </template>
 
@@ -27,4 +27,7 @@
 <style lang="less">
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
+    #app{
+      padding:200px;width:900px;
+    }
 </style>

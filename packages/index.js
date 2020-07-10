@@ -12,6 +12,7 @@ import {sLoading,$loading} from "./loading";
 import {sTimelineItem,sTimeline} from "./timeline";
 import {sSteps,sStepsItem} from "./steps";
 import sCard from "./card";
+import sCascader from "./cascader";
 import sDrawer from "./drawer";
 import sAside from "./aside";
 import sProgress from "./progress";
@@ -42,6 +43,7 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sSteps.name,sSteps);
+    _vue.component(sCascader.name,sCascader);
     _vue.component(sUpload.name,sUpload);
     _vue.component(sStepsItem.name,sStepsItem);
     _vue.component(sTag.name,sTag);
@@ -94,6 +96,7 @@ function install (_vue){
 
 export {
     sUpload,
+    sCascader,
     sRate,
     sStepsItem,
     sSteps,
