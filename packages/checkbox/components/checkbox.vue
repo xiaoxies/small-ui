@@ -5,14 +5,17 @@
                 isChecked?(border?'small-checkbox-checked small-checkbox-bordered':'small-checkbox-checked'):'',
                 'small-checkbox-size-'+size,
                 {'small-checkbox-border':border},
-                {'small-checkbox-disabled':disabled}
+                {'small-checkbox-disabled':disabled},
+                !isChecked && indeterminate?'small-checkbox-indeterminate':''
             ]"
     >
             <span class="small_checkbox_span">
-                <span class="small-checkbox-inner"></span>
+                <span :class="[
+                    'small-checkbox-inner'
+                ]"></span>
                 <input class="small-checkbox-input" :disabled="disabled"  :value="label" @change="onChange"  type="checkbox" >
             </span>
-        <span class="small-checkbox-font"><slot></slot></span>
+            <span class="small-checkbox-font"><slot></slot></span>
     </label>
 </template>
 
@@ -25,6 +28,7 @@
         props:{
             label:String,
             value:String|Boolean,
+            indeterminate:Boolean,
             border:{
                 type:Boolean,
                 default:false
@@ -71,7 +75,9 @@
                     this.dispatch(this._checkboxGroup,'update',e.target.value);
                 }else{
                     //throw new Error("复选框必须有s-checkbox-group父组件")
-                    this.$emit("update::value",!this.value);
+                    if(!this.indeterminate){
+                        this.$emit("update::value",!this.value);
+                    }
                     this.$emit("change",!this.value);
                 }
             }
@@ -119,6 +125,14 @@
             }
         }
         .small-checkbox-font{color: #409eff;}
+    }
+    .small-checkbox-indeterminate{
+        .small-checkbox-inner{
+            border-color: #409eff; background: #409eff;
+            &::before{
+                content:" ";width:80%;height:2px;background:#fff;position: absolute;top:50%;left:10%;transform: translateY(-50%);
+            }
+        }
     }
     .small-checkbox-disabled{
         cursor: not-allowed;
