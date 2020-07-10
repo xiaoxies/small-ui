@@ -1,5 +1,5 @@
 <template>
-    <div class="small-upload-card">
+    <div class="small-upload-card" >
         <transition-group name="upload-card" class="small-upload-transition" >
             <div class="small-upload-card-li" v-for="(item,index) in value" :key="item.url" :style="{
                 width,
@@ -7,13 +7,15 @@
                 'border-radius':circle?'50%':''
             }">
                 <img :src="item.url" alt="">
+                <div class="small-upload-success"></div>
+                <i class="icon-zhengquewancheng iconfont small-upload-success-icon"></i>
                 <div class="small-upload-loading">
-                    <s-icon color="#fff" type="icon-xianshikejian" size="22px"></s-icon>
-                    <s-icon color="#fff" type="icon-xiazaidaoru" size="22px" @click="download(item,index)"></s-icon>
-                    <s-icon color="#fff" type="icon-cuowuguanbiquxiao-yuankuang" size="22px"></s-icon>
+                    <s-icon color="#fff" type="icon-xianshikejian" :size="iconSize" @click="see(item,index)"></s-icon>
+                    <s-icon color="#fff" type="icon-xiazaidaoru" :size="iconSize" @click="download(item,index)"></s-icon>
+                    <s-icon color="#fff" type="icon-cuowuguanbiquxiao-yuankuang" @click="remove(item,index)" :size="iconSize"></s-icon>
                 </div>
             </div>
-            <div class="small-upload-card-btn" key="1111" :style="{
+            <div class="small-upload-card-btn" key="small-upload-content" :style="{
                 width,
                 height,
                 'border-radius':circle?'50%':''
@@ -27,8 +29,8 @@
 
 <script>
     import sIcon from "../../icon";
-    import { saveAs } from 'file-saver'
-    import {compileImage,noCompile} from "../../utils/common";
+
+    import {compileImage,noCompile,download} from "../../utils/common";
     export default {
         name:"cardUpload",
         componentName:"cardUpload",
@@ -41,26 +43,22 @@
             size:{type:String,default:"30px"},
             color:{type:String,default:"#8c939d"},
             icon:{type:String,default:"icon-jia"},
+            iconSize:{type:String,default:"20px"},
             compress:{type:Boolean,default:true},
             limit:Number,
             multiple:{type:Boolean,default:false},
             accept:{type:String,default:"image/*"},
         },
         methods:{
+            see(item,index){
+                this.$emit("see",item,index);
+            },
+            remove(item,index){
+                this.value.splice(index,1);
+                this.$emit("remove",item,index);
+            },
             download(item,index){
-                if(item.url.indexOf("http")!==-1){
-                    saveAs(item.url);
-                }else{
-                    let arr = item.url.split(',');
-                    let mime = arr[0].match(/:(.*?);/)[1];
-                    let bstr = atob(arr[1]);
-                    let n = bstr.length;
-                    let u8arr = new Uint8Array(n);
-                    while(n--){
-                        u8arr[n] = bstr.charCodeAt(n);
-                    }
-                    saveAs(new File([u8arr], item.name||'download', {type:'image/png'}));
-                }
+                download(item.url,item.name);
             },
             async fileChange(e){
                 let arr=[];
@@ -79,7 +77,8 @@
                 }
                 this.$emit("change", this.multiple ? arr: arr[0])
             }
-        }
+        },
+
     }
 </script>
 
@@ -91,15 +90,25 @@
         position: relative;
         &:hover{border-color:#409eff;color:#409eff;}
     }
+    .small-upload-success{
+        position: absolute;right:-25px;top:0px;width:60px;height:20px;background:#67c23a;
+        transform: rotate(45deg);
+    }
+    .small-upload-success-icon{
+        position: absolute;
+        right:0px;top:0px;color:#fff;
+    }
     .small-upload-card-file{position: absolute;top:0px;left:0px;width:100%;height:100%;opacity:0;cursor: pointer;}
     .small-upload-card-li{
         background-color: #fff;border: 1px solid #c0ccda;border-radius: 6px;overflow:hidden;box-sizing: border-box;padding:10px;margin-right:10px;cursor: pointer;
         transition: all 0.3s;position: relative;display:flex;align-items: center;justify-content: center;margin-bottom:10px;
         .small-upload-loading{
-            transition:all 0.4s;position: absolute;top:0px;left:0px;width:100%;height:100%;display:flex;align-items: center;justify-content: space-around;background:rgba(0,0,0,0.5);padding:0px 15%;opacity:0;
-        }
+            transition:all 0.4s;position: absolute;top:0px;left:0px;width:100%;height:100%;display:flex;align-items: center;justify-content: space-around;background:rgba(0,0,0,0.5);padding:0px 15%;opacity:0;z-index:2;       }
         &:hover .small-upload-loading{
             opacity:1;
+        }
+        &:hover  .small-upload-success{
+            opacity:0;
         }
         img{max-width:100%;max-height:100%;}
     }

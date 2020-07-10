@@ -1,3 +1,21 @@
+import { saveAs } from 'file-saver'
+
+function download(url,name){
+    if(url.indexOf("http")!==-1){
+        saveAs(url);
+    }else{
+        let arr = url.split(',');
+        let mime = arr[0].match(/:(.*?);/)[1];
+        let bstr = atob(arr[1]);
+        let n = bstr.length;
+        let u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        saveAs(new File([u8arr], name||'download', {type:'image/png'}));
+    }
+}
+
 
 //将时间转换为 yyyt-mm-dd正常的格式
 function getDate(time=new Date(),format){
@@ -56,6 +74,7 @@ let num=1000;
 function getZIndex(){
     return num++;
 }
+
 
 //图片文件压缩
 function compileImage(file){
@@ -137,5 +156,6 @@ export {
     getDate,
     getDayTime,
     compileImage,
-    noCompile
+    noCompile,
+    download
 }
