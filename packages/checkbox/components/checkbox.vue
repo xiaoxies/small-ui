@@ -3,7 +3,7 @@
             :class="[
                 'small-label-checkbox',
                 isChecked?(border?'small-checkbox-checked small-checkbox-bordered':'small-checkbox-checked'):'',
-                'small-checkbox-size-'+size,
+                border?'small-checkbox-size-'+size:'',
                 {'small-checkbox-border':border},
                 {'small-checkbox-disabled':disabled},
                 !isChecked && indeterminate?'small-checkbox-indeterminate':''
@@ -15,7 +15,7 @@
                 ]"></span>
                 <input class="small-checkbox-input" :disabled="disabled"  :value="label" @change="onChange"  type="checkbox" >
             </span>
-            <span class="small-checkbox-font"><slot></slot></span>
+            <span class="small-checkbox-font" v-if="$slots.default"><slot></slot></span>
     </label>
 </template>
 
@@ -86,14 +86,14 @@
 </script>
 
 <style scoped lang="less">
-
+    .small-label-checkbox+.small-label-checkbox{margin-right:30px;}
     .small-label-checkbox{
         font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         color: #606266;font-weight: 500;line-height: 1;position: relative;box-sizing: border-box;
-        cursor: pointer; display: inline-block; white-space: nowrap;outline: none;font-size: 14px;margin-right: 30px;
+        cursor: pointer;  white-space: nowrap;outline: none;font-size: 14px;display:inline-block;
         .small_checkbox_span{
-            white-space: nowrap;cursor: pointer;
-            outline: none;display: inline-block;line-height: 1;position: relative;vertical-align: middle;
+            cursor: pointer;float:left;
+            outline: none;position: relative;
         }
         .small-checkbox-inner{
             display: inline-block;height: 14px;width: 14px;
@@ -114,7 +114,7 @@
             opacity: 0;outline: none;position: absolute;z-index: -1;top: 0;
             left: 0; right: 0; bottom: 0;margin: 0;
         }
-        .small-checkbox-font{padding-left: 10px;font-size:14px;}
+        .small-checkbox-font{padding-left: 10px;font-size:14px;float:left;}
     }
 
     .small-checkbox-checked{
@@ -149,9 +149,9 @@
     .small-checkbox-border{border: 1px solid #dcdfe6;box-sizing: border-box;}
     .small-checkbox-bordered{border-color: #409eff;;box-sizing: border-box;}
 
-    .small-checkbox-size-big{padding: 12px 20px 0 10px;height: 40px;border-radius: 4px;box-sizing: border-box;}
-    .small-checkbox-size-medium{padding: 10px 20px 0 10px;border-radius: 4px;height: 36px;box-sizing: border-box;}
-    .small-checkbox-size-small{padding: 8px 15px 0 10px;border-radius: 3px;    height: 32px;box-sizing: border-box;}
-    .small-checkbox-size-mini{padding: 6px 15px 0 10px;border-radius: 3px;height: 28px;box-sizing: border-box;}
+    .small-checkbox-size-big{padding: 12px 10px 0 10px;height: 40px;border-radius: 4px;box-sizing: border-box;}
+    .small-checkbox-size-medium{padding: 10px 10px 0 10px;border-radius: 4px;height: 36px;box-sizing: border-box;}
+    .small-checkbox-size-small{padding: 8px 10px 0 10px;border-radius: 3px;    height: 32px;box-sizing: border-box;}
+    .small-checkbox-size-mini{padding: 6px 10px 0 10px;border-radius: 3px;height: 28px;box-sizing: border-box;}
 
 </style>

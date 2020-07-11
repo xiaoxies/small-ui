@@ -37,6 +37,9 @@
             popConfirmEvent:{
                 bind(el,bindings,vnode){
                     el.handler=(e)=>{
+                        if(!vnode.context.closed){
+                            return
+                        }
                         if(el.contains(e.target)){
                             if(!vnode.context.visible){
                                 vnode.context.show();
@@ -75,7 +78,8 @@
         data() {
             return {
                 style:{},
-                visible:false
+                visible:false,
+                closed:true,
             }
         },
         methods:{
@@ -119,6 +123,10 @@
             },
             hide(){
                 this.visible=false;
+                this.closed=false;
+                setTimeout(()=>{
+                    this.closed=true;
+                },300)
                 this.$emit("hide");
             },
             success(){
