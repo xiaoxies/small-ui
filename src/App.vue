@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <s-cascader :data="data" v-model="value"></s-cascader>
+    <s-cascader :data="data" multiple v-model="value"></s-cascader>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
     export default {
         data(){
           return {
+            isTrue:true,
             value:[],
             data:[{
             value: 'zhinan',
@@ -207,12 +208,13 @@
           }
         },
         methods:{
-          onchange(e){
-            this.value=e;
-            if(e){
-              this.indeterminate=false;
-            }
-          }
+          dd(){
+            this.value=['zhinan','shejiyuanze','fankui'];
+          },
+          onchange(){
+            console.log("sdsdsds");
+            this.isTrue=!this.isTrue;
+          },
         }
     }
 </script>

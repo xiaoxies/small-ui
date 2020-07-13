@@ -1,4 +1,4 @@
-import sCascader from "./components";
+import sCascader from "./components/cascader";
 
 sCascader.install=function(Vue){
     Vue.component(sCascader.name,sCascader)

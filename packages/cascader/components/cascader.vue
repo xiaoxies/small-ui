@@ -3,15 +3,15 @@
         'small-cascader':true,
         'small-cascader-active':visible
     }" v-click-cascader>
-        <div class="small-cascader-content">{{value}}</div>
+        <div class="small-cascader-content">{{labelName.join(" / ")}}</div>
         <div class="small-cascader-icon"><s-icon :type="visible?'icon-xiangshangshouqi':'icon-xiangxiazhankai'" color="#c0c4cc"></s-icon></div>
-
         <transition name="cascader">
             <div class="small-cascader-menu" v-if="visible">
                 <div class="small-cascader-list">
                     <div class="small-cascader-menu-one">
-                        <div class="small-cascader-menu-li" v-for="(item,index) in option" :key="'first'+index" @click="first(item,1)">
-                            <s-icon v-if="item.active&&!item.children" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
+                        <div class="small-cascader-menu-li" v-for="(item,index) in option" :key="'first'+index" @click.stop="first(item,1)">
+                            <s-model-checkbox v-model="item.checked" @click="onChange(item,index,1)" v-if="multiple"></s-model-checkbox>
+                            <s-icon v-if="item.active && !item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
                             <div class="small-cascader-menu-name" :style="{
                                 'color':item.active?'#409eff':'',
                                 'font-weight':item.active?'bold':'',
@@ -22,8 +22,9 @@
                         </div>
                     </div>
                     <div  class="small-cascader-menu-one" v-if="children.length>0">
-                        <div class="small-cascader-menu-li" v-for="(item,_index) in children" :key="'two'+_index"  @click="first(item,2)">
-                            <s-icon v-if="item.active&&!item.children" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
+                        <div class="small-cascader-menu-li" v-for="(item,_index) in children" :key="'two'+_index"  @click.stop="first(item,2)">
+                            <s-icon v-if="item.active&&!item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
+                            <s-model-checkbox v-model="item.checked" @click="onChange(item,_index,2)" v-if="multiple"></s-model-checkbox>
                             <div class="small-cascader-menu-name" :style="{
                                 'color':item.active?'#409eff':'',
                                 'font-weight':item.active?'bold':'',
@@ -34,8 +35,9 @@
                         </div>
                     </div>
                     <div  class="small-cascader-menu-one" v-if="next.length>0">
-                        <div class="small-cascader-menu-li" v-for="(item,_index) in next" :key="'two'+_index"  @click="first(item,3)">
-                            <s-icon v-if="item.active&&!item.children" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
+                        <div class="small-cascader-menu-li" v-for="(item,_index) in next" :key="'three'+_index"  @click.stop="first(item,3)">
+                            <s-icon v-if="item.active&&!item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
+                            <s-model-checkbox v-model="item.checked" @click="onChange(item,_index,3)" v-if="multiple"></s-model-checkbox>
                             <div class="small-cascader-menu-name" :style="{
                                 'color':item.active?'#409eff':'',
                                 'font-weight':item.active?'bold':'',
@@ -55,11 +57,13 @@
 
 <script>
     import sIcon from "../../icon";
-    import {sCheckbox} from "../../checkbox";
+    import sModelCheckbox from "./checkbox";
+    import {inputMixins} from "../../utils/mixins";
     export default {
-        name:"cascader",
-        componentName:"cascader",
-        components:{sIcon,sCheckbox},
+        name:"sCascader",
+        componentName:"sCascader",
+        components:{sIcon,sModelCheckbox},
+        mixins:[inputMixins],
         directives:{
             clickCascader:{
                 bind(el,bindings,vnode){
@@ -92,8 +96,21 @@
             trigger:{type:String,default:"click" },
             value:{type:Array}
         },
+        watch:{
+            value(item){
+                if(!item || item.length==0){
+                    return
+                }
+                if(this.values == item){
+                    return
+                }
+                this.values=[];
+                this.labelName=[];
+                this.tree(1,this.data)
+            }
+        },
         created(){
-            this.option=this.tree(this.data)
+            this.option=this.tree(1,this.data)
         },
         data() {
             return {
@@ -102,53 +119,95 @@
                 values:[],
                 option:[],
                 children:[],
-                next:[]
+                next:[],
+                labelName:[]
             }
         },
         methods:{
+            onChange(item,index,type){
+                switch(type){
+                    case 1:
+                        let arr=this.option;
+                        arr[index].checked=!item.checked;
+                        this.option=[];
+                        this.option=arr;
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                }
+
+            },
             first(item,index){
                 if(index==1){
-                    this.option=this.tree(this.data);
+                    this.option=this.tree(2,this.data);
                     this.next=[];
                     if(item.children){
                         this.children=item.children;
                     }
                 }else if(index==2){
-                    this.tree(item.parent.children)
+                    this.children=this.tree(2,item.parent.children)
                     if(item.children){
                         this.next=item.children;
                     }
                 }else{
-                    this.tree(item.parent.children)
+                    this.next=this.tree(2,item.parent.children)
                 }
                 item.active=true;
                 if(!item.children){
-                    //this.$emit("value",this.values);
+                    if(this.multiple){
+                        return
+                    }
+                    this.values=[];
+                    this.labelName=[];
+                    this.getValue(item);
+                    this.$emit("update::value",this.values);
                     this.hide();
                 }
 
             },
-            tree(data,parent){
+            getValue(item){
+                this.labelName.unshift(item[this.label]);
+                this.values.unshift(item[this.val]);
+                if(item.parent){
+                    this.getValue(item.parent);
+                }
+            },
+            tree(index,data,parent){
                 data.forEach((item,key)=>{
-                    item.active=false;
+                    if(index==1 && this.value.indexOf(item[this.val])!==-1){
+                        item.active=true;
+                        this.labelName.push(item[this.label]);
+                    }else{
+                        item.active=false;
+                    }
                     item.checked=false;
                     item.indeterminate=false;
                     if(parent){
                         item.parent=parent;
                     }
                     if(item.children){
-                        this.tree(item.children,item);
+                        if(this.value.indexOf(item[this.val])==0){
+                            this.children=item.children
+                        }else if(this.value.indexOf(item[this.val])==1){
+                            this.next=item.children
+                        }
+                        this.tree(index,item.children,item);
                     }
                 })
                 return data;
             },
             show(){
-
+                this.$emit("show");
                 this.visible=true;
             },
             hide(){
                 this.visible=false;
                 this.closed=false;
+                this.$emit("hide");
                 setTimeout(()=>{
                     this.closed=true;
                 },300)
