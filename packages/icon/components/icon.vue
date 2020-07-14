@@ -1,6 +1,6 @@
 <template>
     <i
-        @click="clickHander"
+        @click.stop="clickHander"
        class="small-icon"
        :class="['iconfont',type]"
        :style="{

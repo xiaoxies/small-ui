@@ -1,53 +1,27 @@
 <template>
     <div :class="{
         'small-cascader':true,
-        'small-cascader-active':visible
-    }" v-click-cascader>
-        <div class="small-cascader-content">{{labelName.join(" / ")}}</div>
-        <div class="small-cascader-icon"><s-icon :type="visible?'icon-xiangshangshouqi':'icon-xiangxiazhankai'" color="#c0c4cc"></s-icon></div>
+        'small-cascader-active':visible,
+        'small-cascader-disabled':disabled,
+    }" ref="cascader" v-click-cascader >
+        <div class="small-cascader-content" >
+            <div class="small-cascader-no-multiple" v-if="!multiple">{{labelName.join(" / ")}}</div>
+            <div class="small-cascader-multiple-content" v-if="multiple">
+                <s-tag closable v-for="(item,index) in labelName" :key="index" @close="tagClose(item,index)">{{item && item.join && item.join(' / ')}}</s-tag>
+            </div>
+        </div>
+        <div class="small-cascader-icon">
+            <s-icon v-if="values.length==0" :type="visible?'icon-xiangshangshouqi':'icon-xiangxiazhankai'" color="#c0c4cc"></s-icon>
+            <s-icon v-if="values.length>0" type="icon-cuowuguanbiquxiao-yuankuang" color="#c0c4cc" @click="clearValues"></s-icon>
+        </div>
         <transition name="cascader">
-            <div class="small-cascader-menu" v-if="visible">
+            <div class="small-cascader-menu" :style="{
+                'top':top+'px'
+            }" v-if="visible">
                 <div class="small-cascader-list">
-                    <div class="small-cascader-menu-one">
-                        <div class="small-cascader-menu-li" v-for="(item,index) in option" :key="'first'+index" @click.stop="first(item,1)">
-                            <s-model-checkbox v-model="item.checked" @click="onChange(item,index,1)" v-if="multiple"></s-model-checkbox>
-                            <s-icon v-if="item.active && !item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            <div class="small-cascader-menu-name" :style="{
-                                'color':item.active?'#409eff':'',
-                                'font-weight':item.active?'bold':'',
-                            }">{{item[label]}}</div>
-                            <div class="small-cascader-next" v-if="item.children">
-                                <s-icon type="icon-xiayiyeqianjinchakangengduo" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div  class="small-cascader-menu-one" v-if="children.length>0">
-                        <div class="small-cascader-menu-li" v-for="(item,_index) in children" :key="'two'+_index"  @click.stop="first(item,2)">
-                            <s-icon v-if="item.active&&!item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            <s-model-checkbox v-model="item.checked" @click="onChange(item,_index,2)" v-if="multiple"></s-model-checkbox>
-                            <div class="small-cascader-menu-name" :style="{
-                                'color':item.active?'#409eff':'',
-                                'font-weight':item.active?'bold':'',
-                            }">{{item[label]}}</div>
-                            <div class="small-cascader-next" v-if="item.children">
-                                <s-icon type="icon-xiayiyeqianjinchakangengduo" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            </div>
-                        </div>
-                    </div>
-                    <div  class="small-cascader-menu-one" v-if="next.length>0">
-                        <div class="small-cascader-menu-li" v-for="(item,_index) in next" :key="'three'+_index"  @click.stop="first(item,3)">
-                            <s-icon v-if="item.active&&!item.children&&!multiple" type="icon-zhengquewancheng" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            <s-model-checkbox v-model="item.checked" @click="onChange(item,_index,3)" v-if="multiple"></s-model-checkbox>
-                            <div class="small-cascader-menu-name" :style="{
-                                'color':item.active?'#409eff':'',
-                                'font-weight':item.active?'bold':'',
-                            }">{{item[label]}}</div>
-                            <div class="small-cascader-next" v-if="item.children">
-                                <s-icon type="icon-xiayiyeqianjinchakangengduo" size="18px" :color="item.active?'#409eff':'#606266'"></s-icon>
-                            </div>
-                        </div>
-                    </div>
-
+                    <s-cascader-panel :data="option" index="option" @click="clickHander" @change="changeHander"></s-cascader-panel>
+                    <s-cascader-panel :data="children" index="children" @click="clickHander" @change="changeHander"></s-cascader-panel>
+                    <s-cascader-panel :data="next" index="next" @click="clickHander" @change="changeHander"></s-cascader-panel>
                     <div class="small-cascader__arrow"></div>
                 </div>
             </div>
@@ -57,13 +31,20 @@
 
 <script>
     import sIcon from "../../icon";
+    import sTag from "../../tag";
     import sModelCheckbox from "./checkbox";
+    import sCascaderPanel from "./cascader-panel";
     import {inputMixins} from "../../utils/mixins";
     export default {
         name:"sCascader",
         componentName:"sCascader",
-        components:{sIcon,sModelCheckbox},
+        components:{sIcon,sModelCheckbox,sCascaderPanel,sTag},
         mixins:[inputMixins],
+        provide(){
+            return {
+                "sCascader":this
+            }
+        },
         directives:{
             clickCascader:{
                 bind(el,bindings,vnode){
@@ -71,12 +52,15 @@
                         if(!vnode.context.closed){
                             return
                         }
+                        if(vnode.context.disabled){
+                            return
+                        }
                         if(el.contains(e.target)){
                             if(!vnode.context.visible){
                                 vnode.context.show();
                             }
                         }else{
-                            if(vnode.context.visible){
+                            if(vnode.context.visible ){
                                 vnode.context.hide();
                             }
                         }
@@ -94,115 +78,350 @@
             val:{type:String,default:"value"},
             multiple:{type:Boolean,default:false},
             trigger:{type:String,default:"click" },
-            value:{type:Array}
-        },
-        watch:{
-            value(item){
-                if(!item || item.length==0){
-                    return
-                }
-                if(this.values == item){
-                    return
-                }
-                this.values=[];
-                this.labelName=[];
-                this.tree(1,this.data)
-            }
-        },
-        created(){
-            this.option=this.tree(1,this.data)
+            value:{type:Array},
+            disabled:{type:Boolean,default:false},
         },
         data() {
             return {
                 visible:false,
+                cleared:true,
                 closed:true,
                 values:[],
                 option:[],
                 children:[],
                 next:[],
-                labelName:[]
+                labelName:[],
+                top:46
+            }
+        },
+        created(){
+            this.option=this.tree(this.data);
+            if(this.value.length>0){
+                if(this.multiple){
+                    this.initMultipleData(this.option);
+                    this.labelName=[];
+                    this.values=[];
+                    this.getMultipleValue(this.option);
+                    this.$emit("update::value",this.values);
+                }else{
+                    let arr=this.option;
+                    this.labelName=this.initData(arr,[]);
+                    console.log(arr);
+                    this.option=arr;
+                }
             }
         },
         methods:{
-            onChange(item,index,type){
-                switch(type){
-                    case 1:
-                        let arr=this.option;
-                        arr[index].checked=!item.checked;
-                        this.option=[];
-                        this.option=arr;
-                        break;
-                    case 2:
+            initData(data,arr){
+                data=data.map((item,index)=>{
+                    if(this.value.indexOf(item[this.val])!==-1){
+                        item.active=true
+                        arr.push(item[this.label]);
 
-                        break;
-                    case 3:
-
-                        break;
-                }
-
-            },
-            first(item,index){
-                if(index==1){
-                    this.option=this.tree(2,this.data);
-                    this.next=[];
+                    }
                     if(item.children){
-                        this.children=item.children;
+                        if(this.children.length==0){
+                            this.children=item.children;
+                        }else if(this.children.length>0 && this.next==0){
+                            this.next=item.children;
+                        }
+                        this.initData(item.children,arr);
                     }
-                }else if(index==2){
-                    this.children=this.tree(2,item.parent.children)
+                    return item;
+                })
+                return arr;
+            },
+            initMultipleData(data){
+                data=data.map((item,index)=>{
+                    for(let i=0;i<this.value.length;i++){
+                        let str = this.value[i][this.value[i].length-1];
+                        if(item[this.val]==str){
+                            item.checked=true;
+                            this.initMultipleRenderData(item);
+                        }
+                    }
                     if(item.children){
-                        this.next=item.children;
+                        this.initMultipleData(item.children);
                     }
-                }else{
-                    this.next=this.tree(2,item.parent.children)
-                }
-                item.active=true;
-                if(!item.children){
-                    if(this.multiple){
-                        return
+                    return item;
+                })
+            },
+            initMultipleRenderData(data){
+                if(data.parent){
+                    let num=0;
+                    let indeterminateNum=0;
+                    data.parent.children.map((item,index)=>{
+                        if(item.checked){
+                            num+=1;
+                        }
+                    })
+                    if(num == data.parent.children.length){
+                        data.parent.checked=true;
+                        data.parent.indeterminate=false;
+                    }else if(num>0){
+                        data.parent.checked=false;
+                        data.parent.indeterminate=true;
                     }
-                    this.values=[];
-                    this.labelName=[];
-                    this.getValue(item);
-                    this.$emit("update::value",this.values);
-                    this.hide();
-                }
-
-            },
-            getValue(item){
-                this.labelName.unshift(item[this.label]);
-                this.values.unshift(item[this.val]);
-                if(item.parent){
-                    this.getValue(item.parent);
+                    if(data.parent.parent){
+                        this.initMultipleRenderData(data.parent);
+                    }
                 }
             },
-            tree(index,data,parent){
-                data.forEach((item,key)=>{
-                    if(index==1 && this.value.indexOf(item[this.val])!==-1){
-                        item.active=true;
-                        this.labelName.push(item[this.label]);
+            clearValues(){
+                this.option=this.tree(this.data);
+                this.next=[];
+                console.log(this.option,"=====this.option");
+                if(this.multiple){
+                    this.checkIsChcked();
+                }
+                this.labelName=[];
+                this.$emit("update::value",[]);
+            },
+            tagClose(item,index){
+                let str = item[item.length-1]
+                this.removeDataRow(this.option,str);
+            },
+            removeDataRow(data,str){
+                data.forEach((item)=>{
+                    if(item[this.label] == str){
+                        console.log(item);
+                        item.checked=false;
+                        this.checkIsChcked();
                     }else{
-                        item.active=false;
+                        if(item.children){
+                            this.removeDataRow(item.children,str);
+                        }
                     }
+                })
+            },
+            changeHander(item,index,type){
+                switch(type){
+                    case 'option':
+                        let arr1=this.option;
+                        arr1[index].checked=!item.checked;
+                        arr1[index].indeterminate=false;
+                        arr1[index]=this.multipleInitOption(arr1[index],item.checked)
+                        this.option=arr1;
+                        this.children=[];
+                        this.checkIsChcked()
+                        break;
+                    case 'children':
+                        if(this.children[index].children){
+                            let arr2=this.children;
+                            arr2[index].checked=!item.checked;
+                            arr2[index].indeterminate=false;
+                            arr2[index]=this.multipleInitOption(arr2[index],item.checked)
+                            this.children=arr2;
+                            this.next=[];
+                            this.checkIsChcked()
+                        }else{
+                            this.children=this.children.map((row,key)=>{
+                                if(key==index){
+                                    row.checked=!item.checked
+                                }
+                                return row;
+                            })
+                            this.checkIsChcked()
+                        }
+                        break;
+                    case 'next':
+                        this.next=this.next.map((row,key)=>{
+                            if(key==index){
+                                row.checked=!item.checked;
+                            }
+                            return row;
+                        })
+                        this.checkIsChcked()
+                        break;
+                }
+            },
+            checkIsChcked(){
+                this.children=this.children.map((item,index)=>{
+                    let num=0;
+                    if(item.children){
+                        item.children.forEach((items,indexs)=>{
+                            if(items.checked){
+                                num+=1;
+                            }
+                        })
+                        if(item.children&&item.children.length==num){
+                            item.checked=true;
+                            item.indeterminate=false;
+                            return item;
+                        }else if(num>0){
+                            item.checked=false;
+                            item.indeterminate=true;
+                            return item;
+                        }else{
+                            item.checked=false;
+                            item.indeterminate=false;
+                            return item;
+                        }
+                    }
+                    return item;
+                })
+                this.option=this.option.map((item,index)=>{
+                    let checkNum=0;
+                    let indeterminateNum=0;
+                    if(item.children){
+                        item.children.forEach((items,indexs)=>{
+                            if(items.checked){
+                                checkNum+=1;
+                            }
+                            if(items.indeterminate){
+                                indeterminateNum+=1;
+                            }
+                        })
+                        if(item.children.length==checkNum){
+                            item.checked=true;
+                            item.indeterminate=false;
+                            return item;
+                        }else if(checkNum>0){
+                            item.checked=false;
+                            item.indeterminate=true;
+                            return item;
+                        }else{
+                            if(indeterminateNum>0){
+                                item.checked=false;
+                                item.indeterminate=true;
+                            }else{
+                                item.checked=false;
+                                item.indeterminate=false;
+                            }
+                            return item;
+                        }
+                    }
+                    return item;
+                })
+                this.labelName=[];
+                this.values=[];
+                this.getMultipleValue(this.option);
+                this.$emit("update::value",this.values);
+                this.$nextTick(()=>{
+                    this.top=this.$refs.cascader.offsetHeight;
+                })
+            },
+            getMultipleValue(data){
+                data && data.forEach((item)=>{
+                    if(item.checked && !item.children){
+                        const {label,value} = this.getMultipleLabel(item,[],[]);
+                        this.labelName.push(label);
+                        this.values.push(value);
+
+                    }
+                    if(item.children){
+                        this.getMultipleValue(item.children)
+                    }
+                })
+            },
+            getMultipleLabel(item,label,value){
+                label.unshift(item[this.label])
+                value.unshift(item[this.val])
+                if(item.parent){
+                    this.getMultipleLabel(item.parent,label,value);
+                }
+                return {
+                    label,
+                    value
+                }
+            },
+            multipleInitOption(data,bool){
+                data.children&&data.children.forEach((item,index)=>{
+                    item.checked=bool;
+                    item.indeterminate=false;
+                    this.multipleInitOption(item,bool);
+                })
+                return data;
+            },
+            tree(data,parent){
+                data.forEach((item)=>{
+                    item.active=false;
                     item.checked=false;
                     item.indeterminate=false;
                     if(parent){
                         item.parent=parent;
                     }
                     if(item.children){
-                        if(this.value.indexOf(item[this.val])==0){
-                            this.children=item.children
-                        }else if(this.value.indexOf(item[this.val])==1){
-                            this.next=item.children
-                        }
-                        this.tree(index,item.children,item);
+                        this.tree(item.children,item);
                     }
                 })
                 return data;
             },
+            initOption(data){
+                data=data.map((item,key)=>{
+                    item.active=false;
+                    if(item.children){
+                        this.initOption(item.children);
+                    }
+                    return item;
+                });
+                return data;
+            },
+            clickHander(item,index,type){
+                switch(type){
+                    case 'option':
+                        let arr=this.option;
+                        arr=this.initOption(arr);
+                        arr[index].active=true;
+                        this.option=arr;
+                        this.next=[];
+                        if(this.option[index].children){
+                            this.children=this.option[index].children;
+                        }else{
+                            if(this.multiple)return
+                            this.values=[];
+                            this.labelName=[];
+                            this.getValue(this.option[index]);
+                            this.$emit("update::value",this.values);
+
+                            this.hide();
+                        }
+                        break;
+                    case 'children':
+                        let arr1=this.children;
+                        arr1=this.initOption(arr1);
+                        arr1[index].active=true;
+                        this.children=arr1;
+                        if(this.children[index].children){
+                            this.next=this.children[index].children;
+                        }else{
+                            if(this.multiple)return
+                            this.values=[];
+                            this.labelName=[];
+                            this.getValue(this.children[index]);
+                            this.$emit("update::value",this.values);
+
+                            this.hide();
+                        }
+                        break;
+                    case 'next':
+                        let arr2=this.next;
+                        arr2=this.initOption(arr2);
+                        arr2[index].active=true;
+                        this.next=arr2;
+                        if(this.multiple)return
+                        this.values=[];
+                        this.labelName=[];
+                        this.getValue(this.next[index]);
+                        this.$emit("update::value",this.values);
+
+                        this.hide();
+                        break;
+                }
+            },
+            getValue(data){
+                this.labelName.unshift(data[this.label])
+                this.values.unshift(data[this.val])
+                if(data.parent){
+                    this.getValue(data.parent);
+                }
+            },
             show(){
                 this.$emit("show");
                 this.visible=true;
+                this.$nextTick(()=>{
+                    this.top=this.$refs.cascader.offsetHeight;
+                })
             },
             hide(){
                 this.visible=false;
@@ -217,12 +436,11 @@
 </script>
 
 <style scoped lang="less">
+
     .small-cascader{
         position: relative;width:100%;min-height:40px;background-color: #fff;border-radius: 4px;transition: all 0.4s;
         border: 1px solid #dcdfe6;box-sizing: border-box;cursor: pointer;display:flex;align-items: center;justify-content: space-between;
-        &:hover{
-            border-color: #c0c4cc;
-        }
+
     }
     .small-cascader-list{position: relative;background: #fff;border: 1px solid #e4e7ed;box-shadow: 0 2px 8px 0 rgba(0,0,0,.1);    border-radius: 4px;display:flex;align-items: center;justify-content: flex-start;}
     .small-cascader-active{
@@ -230,15 +448,20 @@
         &:hover{border-color:#409eff;}
     }
     .small-cascader-content{
-        width:100%;height:100%;padding-right:35px;color:#606266;font-size:14px;
-        overflow:hidden;text-overflow: ellipsis;white-space: nowrap;padding-left:10px;
+        width:100%;height:100%;padding-right:35px;color:#606266;
+        padding-left:10px;
+        .small-cascader-no-multiple{width:100%;height:100%;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;font-size:14px;}
+        .small-cascader-multiple-content{
+            padding:5px;
+            /deep/ .small-tag{margin-bottom:5px;margin-left:0px;margin-right:5px;}
+        }
     }
     .small-cascader-icon{
         width:35px;height:100%;display:flex;align-items: center;justify-content: center;
         position: absolute;right:0px;top:0px;transition: all 0.3s;
     }
     .small-cascader-menu{position: absolute;top:40px;left:0px;padding-top:10px;}
-    .small-cascader-menu-one{width:180px;height:200px;overflow-y:auto;border-right: 1px solid #e4e7ed;padding-top:8px;}
+
     .small-cascader-menu-one:last-child{border-right: none;}
     .small-cascader__arrow{
         display:block;
@@ -255,12 +478,10 @@
             position:absolute;top:-9px;left:-10px;
         }
     }
-    .small-cascader-menu-li{
-        width:100%;height:35px;padding-right:25px;position: relative;padding-left:10px;
-        display:flex;align-items: center;justify-content: flex-start;
-        &:hover{background: #f5f7fa;}
-        .small-cascader-menu-name{margin-left:5px;font-size:14px;box-sizing: border-box;width:120px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden;}
-        .small-cascader-next{position: absolute;right:7px;height:100%;display:flex;align-items: center;justify-content: center;}
+
+    .small-cascader-disabled{
+        cursor: not-allowed;background-color: #f5f7fa;
+        border-color: #e4e7ed;color: #c0c4cc;
     }
 
     .cascader-enter-active{animation: cascader-fade-in 0.3s;}

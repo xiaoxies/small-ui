@@ -5,7 +5,7 @@
         'small-tag-'+effect+'-'+type,
     ]">
         <slot></slot>
-        <i v-if="closable" @click="close" class="iconfont icon-cuowuguanbiquxiao small-tag-closable"></i>
+        <i v-if="closable" @click.stop="close" class="iconfont icon-cuowuguanbiquxiao small-tag-closable"></i>
     </div>
 </template>
 
