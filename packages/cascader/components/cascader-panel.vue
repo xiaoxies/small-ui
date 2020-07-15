@@ -16,7 +16,7 @@
 
 <script>
     import sIcon from "../../icon";
-    import sModelCheckbox from "./checkbox";
+    import {sModelCheckbox} from "../../checkbox";
     export default {
         name:"sCascaderPanel",
         componentName:"sCascaderPanel",

@@ -27,7 +27,7 @@
                 }else{
                     newArr.splice(newArr.findIndex(item => item === val), 1)
                 }
-                this.$emit("update::value",newArr);
+                this.updateModel(newArr);
             }
         }
     }

@@ -32,13 +32,12 @@
 <script>
     import sIcon from "../../icon";
     import sTag from "../../tag";
-    import sModelCheckbox from "./checkbox";
     import sCascaderPanel from "./cascader-panel";
     import {inputMixins} from "../../utils/mixins";
     export default {
         name:"sCascader",
         componentName:"sCascader",
-        components:{sIcon,sModelCheckbox,sCascaderPanel,sTag},
+        components:{sIcon,sCascaderPanel,sTag},
         mixins:[inputMixins],
         provide(){
             return {
@@ -65,10 +64,10 @@
                             }
                         }
                     };
-                    document.addEventListener(vnode.context.trigger,el.handler)
+                    document.addEventListener('click',el.handler)
                 },
                 unbind(el,bindings,vnode){
-                    document.addEventListener(vnode.context.trigger,el.handler)
+                    document.addEventListener('click',el.handler)
                 }
             }
         },
@@ -77,7 +76,6 @@
             label:{type:String,default:"label"},
             val:{type:String,default:"value"},
             multiple:{type:Boolean,default:false},
-            trigger:{type:String,default:"click" },
             value:{type:Array},
             disabled:{type:Boolean,default:false},
         },
@@ -102,7 +100,7 @@
                     this.labelName=[];
                     this.values=[];
                     this.getMultipleValue(this.option);
-                    this.$emit("update::value",this.values);
+                    this.updateModel(this.values);
                 }else{
                     let arr=this.option;
                     this.labelName=this.initData(arr,[]);
@@ -175,7 +173,7 @@
                     this.checkIsChcked();
                 }
                 this.labelName=[];
-                this.$emit("update::value",[]);
+                this.updateModel([]);
             },
             tagClose(item,index){
                 let str = item[item.length-1]
@@ -296,7 +294,7 @@
                 this.labelName=[];
                 this.values=[];
                 this.getMultipleValue(this.option);
-                this.$emit("update::value",this.values);
+                this.updateModel(this.values);
                 this.$nextTick(()=>{
                     this.top=this.$refs.cascader.offsetHeight;
                 })
@@ -372,7 +370,7 @@
                             this.values=[];
                             this.labelName=[];
                             this.getValue(this.option[index]);
-                            this.$emit("update::value",this.values);
+                            this.updateModel(this.values);
 
                             this.hide();
                         }
@@ -389,7 +387,7 @@
                             this.values=[];
                             this.labelName=[];
                             this.getValue(this.children[index]);
-                            this.$emit("update::value",this.values);
+                            this.updateModel(this.values);
 
                             this.hide();
                         }
@@ -403,7 +401,7 @@
                         this.values=[];
                         this.labelName=[];
                         this.getValue(this.next[index]);
-                        this.$emit("update::value",this.values);
+                        this.updateModel(this.values);
 
                         this.hide();
                         break;
@@ -452,7 +450,7 @@
         padding-left:10px;
         .small-cascader-no-multiple{width:100%;height:100%;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;font-size:14px;}
         .small-cascader-multiple-content{
-            padding:5px;
+            padding:5px;padding-bottom:0px;
             /deep/ .small-tag{margin-bottom:5px;margin-left:0px;margin-right:5px;}
         }
     }

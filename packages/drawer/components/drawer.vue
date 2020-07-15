@@ -48,7 +48,7 @@
                 }
             },
             close(){
-                this.$emit("update::value",false);
+                this.updateModel(false);
             }
         }
     }

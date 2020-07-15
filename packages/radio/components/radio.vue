@@ -59,7 +59,7 @@
                     if(this.isGroup){
                         this.dispatch(this._RadioGroup,'update',this.label)
                     }else{
-                        this.$emit("update::value",this.label)
+                        this.updateModel(this.label)
                     }
                 }
             }
@@ -72,7 +72,7 @@
                 if(this.isGroup){
                     this.dispatch(this._RadioGroup,'update',this.label)
                 }else{
-                    this.$emit("update::value",this.label)
+                    this.updateModel(this.label)
                 }
 
             }

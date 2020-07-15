@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2742670",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "4933419",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e760",
+      "unicode_decimal": 59232
+    },
+    {
       "icon_id": "1727370",
       "name": "29业务",
       "font_class": "yewu",

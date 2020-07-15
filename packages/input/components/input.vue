@@ -97,7 +97,7 @@
                 this.myType=this.myType=="password"?'text':'password'
             },
             clearHandler(){
-                this.$emit("update::value","");
+                this.updateModel("");
                 this.$emit("input","");
                 this.$emit("clear","");
                 //this.$refs.input.focus();
@@ -111,7 +111,7 @@
                 this.$emit("blur",e);
             },
             onInput(e){
-                this.$emit("update::value",e.target.value);
+                this.updateModel(e.target.value);
                 this.$emit("input",e)
             }
         }

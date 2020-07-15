@@ -55,7 +55,7 @@
         methods:{
             clickHander(){
                 if(!this.disabled){
-                    this.$emit("update::value",!this.value);
+                    this.updateModel(!this.value);
                     this.$emit("change",!this.value);
                 }
             }

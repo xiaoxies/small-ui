@@ -55,7 +55,7 @@
                 }
             },
             close(e){
-                this.$emit("update::value",false);
+                this.updateModel(false);
             }
         }
     }

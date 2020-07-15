@@ -116,7 +116,7 @@
                 if(this.readonly){
                     return
                 }
-                this.$emit("update::value",item.index);
+                this.updateModel(item.index);
                 this.computedText(item.index);
             },
             leaveActive(item,index){

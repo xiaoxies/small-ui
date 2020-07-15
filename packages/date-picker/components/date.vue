@@ -87,7 +87,7 @@
         created(){
             const day=getDayTime(this.value||new Date());
             if(this.value){
-                this.$emit("update::value",getDate(this.value,this.format));
+                this.updateModel(getDate(this.value,this.format));
             }
             this.myDate=day;
         },
@@ -105,7 +105,7 @@
                 let day="";
                 if(this.value){
                     day=getDate(this.value,this.format);
-                    this.$emit("update::value",day);
+                    this.updateModel(day);
                 }
                 return day;
             }
@@ -178,7 +178,7 @@
             dayClick(item){
                 let day=new Date(item.year,item.month-1,item.day,item.hour,item.minute,item.sencond)
                 this.myDate=getDayTime(day);
-                this.$emit("update::value",getDate(day,this.format));
+                this.updateModel(getDate(day,this.format));
                 setTimeout(()=>{
                     this.blur();
                 },0)

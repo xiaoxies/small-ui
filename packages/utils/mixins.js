@@ -6,6 +6,9 @@ export const inputMixins = {
     methods:{
         dispatch(component,methods,value){
             component[methods](value);
+        },
+        updateModel(data){
+            this.$emit('update::value',data);
         }
     }
 }

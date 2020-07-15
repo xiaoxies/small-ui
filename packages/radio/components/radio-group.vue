@@ -15,7 +15,7 @@
         },
         methods:{
             update(val){
-                this.$emit("update::value",val);
+                this.updateModel(val);
             }
         }
     }

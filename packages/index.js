@@ -6,13 +6,15 @@ import {sCollapseItem,sCollapse} from "./collapse";
 import {sBreadcrumb,sBreadcrumbItem} from "./breadcrumb";
 import {sDropdown,sDropdownItem,sDropdownMenu} from "./dropdown";
 import {sRadio,sRadioGroup} from "./radio";
-import {sCheckbox,sCheckboxGroup} from "./checkbox";
+import {sTabs,sTabsPanel} from "./tabs";
+import {sCheckbox,sCheckboxGroup,sModelCheckbox} from "./checkbox";
 import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
 import {sTimelineItem,sTimeline} from "./timeline";
 import {sSteps,sStepsItem} from "./steps";
 import sCard from "./card";
 import sCascader from "./cascader";
+import {sTree,sTreeItem} from "./tree";
 import sDrawer from "./drawer";
 import sAside from "./aside";
 import sProgress from "./progress";
@@ -43,6 +45,11 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sSteps.name,sSteps);
+    _vue.component(sTabsPanel.name,sTabsPanel);
+    _vue.component(sTabs.name,sTabs);
+    _vue.component(sTree.name,sTree);
+    _vue.component(sTreeItem.name,sTreeItem);
+    _vue.component(sModelCheckbox.name,sModelCheckbox);
     _vue.component(sCascader.name,sCascader);
     _vue.component(sUpload.name,sUpload);
     _vue.component(sStepsItem.name,sStepsItem);
@@ -95,6 +102,11 @@ function install (_vue){
 
 
 export {
+    sTabsPanel,
+    sTabs,
+    sTree,
+    sTreeItem,
+    sModelCheckbox,
     sUpload,
     sCascader,
     sRate,

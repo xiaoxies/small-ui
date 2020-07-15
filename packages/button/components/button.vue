@@ -1,5 +1,5 @@
 <template>
-    <button @click="handleClick" :disabled="disabled||loading" :type="htmlType" :class="[
+    <button @click.stop="handleClick" :disabled="disabled||loading" :type="htmlType" :class="[
         'small-button',
         'small-button-'+(plain?'plain-'+type:type),
         'small-button-size-'+size,

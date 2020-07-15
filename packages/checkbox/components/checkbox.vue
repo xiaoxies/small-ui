@@ -74,7 +74,7 @@
                     this.dispatch(this._checkboxGroup,'update',e.target.value);
                 }else{
                     //throw new Error("复选框必须有s-checkbox-group父组件")
-                    this.$emit("update::value",!this.value)
+                    this.updateModel(!this.value)
                     this.$emit("change",!this.value);
                 }
             }

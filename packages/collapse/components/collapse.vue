@@ -24,7 +24,7 @@
         },
         methods:{
             onChange(name){
-                this.$emit("update::value",name);
+                this.updateModel(name);
                 this.$emit("change",name)
             }
         }

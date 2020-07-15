@@ -24,7 +24,7 @@ export default {
                             self.$emit("exceed",file,fileList);
                         },
                         value(list){
-                            self.$emit("update::value",list)
+                            self.updateModel(list)
                         },
                         remove(item,index){
                             self.$emit("remove",item,index)
@@ -43,7 +43,7 @@ export default {
                             self.$emit("exceed",file,fileList);
                         },
                         value(list){
-                            self.$emit("update::value",list)
+                            self.updateModel(list)
                         },
                         remove(item,index){
                             self.$emit("remove",item,index)
@@ -59,7 +59,7 @@ export default {
                             self.$emit("change",e);
                         },
                         value(val){
-                            self.$emit("update::value",val)
+                            self.updateModel(val)
                         }
                     }},[this.$slots.default]);
                 return avatarElement;
@@ -78,7 +78,7 @@ export default {
                             self.$emit("remove",item,index);
                         },
                         value(val){
-                            self.$emit("update::value",val)
+                            self.updateModel(val)
                         }
                     }});
                 return cardElement;
@@ -91,7 +91,7 @@ export default {
                             self.$emit("see",item,index);
                         },
                         remove(item,index){
-                            self.$emit("update::value","");
+                            self.updateModel("");
                             self.$emit("remove",item,index);
                         }
                     }},[this.$slots.default]);
