@@ -20,7 +20,7 @@
                 </div>
                 <transition-group name="tree">
                     <div class="small-tree-item-content" :key="item.label" v-show="item.show">
-                        <s-tree-item :data="item.children" :show-checkbox="showCheckbox" :level="level+1" :show-all="showAll" :props="props" v-if="item.children && item.children.length"></s-tree-item>
+                        <s-tree-item :data="item.children" :show-checkbox="showCheckbox" :level="level+1" :show-all="showAll" :label="label" v-if="item.children && item.children.length"></s-tree-item>
                     </div>
                 </transition-group>
             </div>
@@ -58,13 +58,7 @@
             data:{type:Array,default:()=>[]},
             showAll:{type:Boolean,default:false},
             showCheckbox:{type:Boolean,default:false},
-            props:{
-                type:Object,default(){
-                    return {
-                        label:'label',
-                    }
-                }
-            },
+            label:{type:String,default:"'label'"},
             level:{type:Number,default:1}
         },
         methods:{

@@ -1,7 +1,7 @@
 <template>
     <div class="small-tree" key="small-tree">
         <div class="small-tree-ul">
-            <s-tree-item :data="list" :props="props" :show-all="showAll" :show-checkbox="showCheckbox">
+            <s-tree-item :data="list" :label="label" :show-all="showAll" :show-checkbox="showCheckbox">
                 <template slot-scope="{row}">
                     <slot :row="row"></slot>
                 </template>
@@ -25,13 +25,7 @@
             showCheckbox:{type:Boolean,default:false},
             value:{type:Array,default:()=>[]},
             nodeKey:{type:String,default:"id"},
-            props:{
-                type:Object,default(){
-                    return {
-                        label:'label',
-                    }
-                }
-            }
+            label:{type:String,default:"'label'"},
         },
         provide(){
             return {
@@ -108,7 +102,7 @@
                     }else{
                         this.$set(item,"checked",false);
                     }
-                    this.$set(item,"label",item[this.props.label]);
+                    this.$set(item,"label",item[this.label]);
                     this.$set(item,"indeterminate",false);
                     this.$set(item,"children",item.children);
 
