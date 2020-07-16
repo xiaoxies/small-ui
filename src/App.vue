@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <s-tabs>
+        <s-tabs v-model="value" type="card">
             <s-tabs-panel title="用户管理" name="first">
                 <span style="font-size:12px;">用户管理</span>
             </s-tabs-panel>
@@ -15,13 +15,11 @@
     export default {
         data(){
           return {
-
+              value:"second"
           }
         },
         methods:{
-            sss(s){
-                console.log(s);
-            }
+
         }
     }
 </script>
