@@ -130,7 +130,6 @@
         },
         methods:{
             clearData(){
-                console.log("进来了吗");
                 if(this.multiple){
                     this.labelArr=[];
                     this.valArr=[];
