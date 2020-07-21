@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-        <s-tabs v-model="value" type="card">
-            <s-tabs-panel title="用户管理" name="first">
-                <span style="font-size:12px;">用户管理</span>
-            </s-tabs-panel>
-            <s-tabs-panel title="配置管理" name="second">配置管理</s-tabs-panel>
-            <s-tabs-panel title="角色管理" name="third">角色管理</s-tabs-panel>
-            <s-tabs-panel title="定时任务补偿" name="fourth">定时任务补偿</s-tabs-panel>
-        </s-tabs>
+        <s-select v-model="value">
+            <s-option label="男" value="1"></s-option>
+            <s-option label="女" value="0"></s-option>
+        </s-select>
   </div>
 </template>
 
@@ -15,7 +11,7 @@
     export default {
         data(){
           return {
-              value:"second"
+              value:"1"
           }
         },
         methods:{

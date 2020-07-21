@@ -21,6 +21,7 @@ import sProgress from "./progress";
 import sHeader from "./header";
 import sContainer from "./container";
 import sFooter from "./footer";
+import {sSelect,sOption} from "./select";
 import sMain from "./main";
 import sPopconfirm from "./popconfirm";
 import sPopover from "./popover";
@@ -45,6 +46,8 @@ import sNotify from "./notify";
 
 function install (_vue){
     _vue.component(sSteps.name,sSteps);
+    _vue.component(sSelect.name,sSelect);
+    _vue.component(sOption.name,sOption);
     _vue.component(sTabsPanel.name,sTabsPanel);
     _vue.component(sTabs.name,sTabs);
     _vue.component(sTree.name,sTree);
@@ -102,6 +105,8 @@ function install (_vue){
 
 
 export {
+    sOption,
+    sSelect,
     sTabsPanel,
     sTabs,
     sTree,
