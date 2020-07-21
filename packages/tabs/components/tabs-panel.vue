@@ -26,8 +26,14 @@
           row:Object
         },
         inject:['sTabs'],
-        beforeCreate() {
+        created(){
             this.$parent.panels.push(this);
+        },
+        beforeDestroy(){
+            let index=this.$parent.panels.indexOf(this);
+            if(index!==-1){
+                this.$parent.panels.splice(index,1);
+            }
         },
         mounted(){
             this.$nextTick(()=>{
