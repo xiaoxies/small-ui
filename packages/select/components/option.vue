@@ -1,7 +1,10 @@
 <template>
-    <div class="small-option" @click.stop="clickHander" v-show="visible">
+    <div :class="[
+        'small-option',
+        {'small-option-disabled':disabled}
+    ]" @click.stop="clickHander" v-show="visible">
         <span :class="{'small-option-active':isShow}">{{label}}</span>
-        <s-icon v-if="isShow" type="icon-zhengquewancheng" size="16px" color="#409eff"></s-icon>
+        <s-icon v-if="iconShow" type="icon-zhengquewancheng" size="16px" color="#409eff"></s-icon>
     </div>
 </template>
 
@@ -13,10 +16,24 @@
         components:{sIcon},
         props:{
             label:String,
-            value:String
+            value:String|Number,
+            icon:{
+                type:Boolean,
+                default:true
+            },
+            disabled:{
+                type:Boolean,
+                default:false
+            }
         },
         inject:['sSelect'],
         computed:{
+            iconShow(){
+                if(!this.icon){
+                    return false;
+                }
+                return this.isShow;
+            },
             isShow(){
                 if(this.sSelect.multiple && this.sSelect.value.indexOf(this.value)!==-1){
                     return true
@@ -30,6 +47,9 @@
         },
         methods:{
             clickHander(){
+                if(this.disabled){
+                    return
+                }
                 this.sSelect.clickHander(this.label,this.value);
             },
             escapeRegexpString(value = ''){
@@ -37,6 +57,7 @@
             },
             queryVisible(query){
                 this.visible = new RegExp(this.escapeRegexpString(query), 'i').test(this.label);
+                console.log(this.visible,"============this.visible");
                 return this.visible;
             }
         },
@@ -72,11 +93,16 @@
 
 <style scoped lang="less">
     .small-option{
-        width:100%;padding:0px 20px;height:35px; color: #606266;cursor: pointer;
+        width:100%;padding:0px 15px;height:35px; color: #606266;cursor: pointer;
         display:flex;align-items: center;justify-content: space-between;font-size:14px;
         &:hover{background:#f5f7fa;}
     }
     .small-option-active{
         color:#409eff;font-weight:bold;
+    }
+    .small-option-disabled{
+        background-color: #f5f7fa;
+        border-color: #e4e7ed;
+        color: #c0c4cc;cursor: not-allowed;
     }
 </style>

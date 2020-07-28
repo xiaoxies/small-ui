@@ -1,5 +1,8 @@
 <template>
-    <div v-select-click-slide class="small-select">
+    <div v-select-click-slide :class="[
+        'small-select',
+        {'small-select-disabled':disabled}
+    ]">
         <div :class="[
             'small-select-input',
             'small-select-input-'+size
@@ -14,7 +17,7 @@
                 <i :class="visible?'iconfont icon-xiangshangshouqi':'iconfont icon-xiangxiazhankai'"></i>
             </div>
         </div>
-        <s-input :size="size" @input="inputChange" v-model="val" v-if="!multiple" :readonly="!filterable" ref="inputs" :placeholder="placeholder" :suffixIcon="visible?'icon-xiangshangshouqi':'icon-xiangxiazhankai'"></s-input>
+        <s-input :size="size" @input="inputChange" :disabled="disabled" v-model="val" v-if="!multiple" :readonly="!filterable" ref="inputs" :placeholder="placeholder" :suffixIcon="visible?'icon-xiangshangshouqi':'icon-xiangxiazhankai'"></s-input>
 
         <div class="small-select-close" v-show="showClose" @click.stop="clearData">
             <s-icon type="icon-cuowuguanbiquxiao-yuankuang" size="18px" @click.stop="clearData"></s-icon>
@@ -51,6 +54,8 @@
             filterable:{type:Boolean,default:false},
             value:String|Array,
             multiple:{type:Boolean,default:false},
+            disabled:{type:Boolean,default:false},
+            cleared:{type:Boolean,default:false}
         },
         provide(){
             return {
@@ -63,6 +68,9 @@
                     el.handler=(e)=>{
                         e.stopPropagation();
                         if(!vnode.context.closed){
+                            return
+                        }
+                        if(vnode.context.disabled){
                             return
                         }
                         if(el.contains(e.target)){
@@ -89,6 +97,12 @@
         },
         computed:{
             showClose(){
+                if(this.disabled){
+                    return false;
+                }
+                if(!this.cleared){
+                    return false;
+                }
                 if(this.multiple){
                     return this.valArr.length>0;
                 }else{
@@ -130,6 +144,9 @@
         },
         methods:{
             clearData(){
+                if(this.disabled){
+                    return
+                }
                 if(this.multiple){
                     this.labelArr=[];
                     this.valArr=[];
@@ -138,6 +155,13 @@
                     this.val="";
                     this.updateModel("")
                 }
+                let num=0;
+                this.options.forEach((item)=>{
+                    if(item.queryVisible(this.val)){
+                        num+=1
+                    }
+                })
+                this.filteredOptionsCount=num;
             },
             inputChange(e){
                 let num=0;
@@ -257,7 +281,11 @@
 
         }
     }
-
+    .small-select-disabled{
+        background-color: #f5f7fa;
+        border-color: #e4e7ed;
+        color: #c0c4cc;cursor: not-allowed;
+    }
     .select-enter-active{animation: select-fade-in 0.3s;}
     .select-leave-active{animation: select-fade-out 0.3s;}
     @keyframes select-fade-in {

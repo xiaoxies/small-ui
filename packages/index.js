@@ -17,6 +17,7 @@ import sCascader from "./cascader";
 import {sTree,sTreeItem} from "./tree";
 import sDrawer from "./drawer";
 import sAside from "./aside";
+import sPagination from "./pagination";
 import sProgress from "./progress";
 import sHeader from "./header";
 import sContainer from "./container";
@@ -45,6 +46,7 @@ import sMessageBox from "./message-box";
 import sNotify from "./notify";
 
 function install (_vue){
+    _vue.component(sPagination.name,sPagination);
     _vue.component(sSteps.name,sSteps);
     _vue.component(sSelect.name,sSelect);
     _vue.component(sOption.name,sOption);
@@ -105,6 +107,7 @@ function install (_vue){
 
 
 export {
+    sPagination,
     sOption,
     sSelect,
     sTabsPanel,

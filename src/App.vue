@@ -1,21 +1,6 @@
 <template>
   <div id="app">
-      <s-button @click="clickHander">开始</s-button>
-        <s-select v-model="value">
-            <s-option label="男1111" value="1"></s-option>
-            <s-option label="女222" value="0"></s-option>
-            <s-option label="女333" value="2"></s-option>
-            <s-option label="女444" value="3"></s-option>
-            <s-option label="女555" value="4"></s-option>
-            <s-option label="女666" value="5"></s-option>
-            <s-option label="女777" value="6"></s-option>
-            <s-option label="女888" value="7"></s-option>
-            <s-option label="女999" value="8"></s-option>
-            <s-option label="女1010" value="9"></s-option>
-            <s-option label="女1111" value="10"></s-option>
-        </s-select>
-
-
+      
   </div>
 </template>
 
@@ -23,13 +8,21 @@
     export default {
         data(){
           return {
-              value:""
+              value:"2",
+              list:[
+                  {label:"第一个",value:1},
+                  {label:"第二个",value:2},
+                  {label:"第三个",value:3},
+                  {label:"第四个",value:4},
+              ]
           }
         },
         methods:{
-            clickHander(){
-                this.value="5";
-            }
+            pageChange(page,size,type){
+                console.log(page,size,type,"=============");
+                this.page=page;
+                this.page_size=size;
+            },
         }
     }
 </script>
@@ -38,6 +31,6 @@
     *{padding:0px;margin:0px;box-sizing: border-box;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
     #app{
-      padding:200px;width:900px;
+      padding:200px;
     }
 </style>

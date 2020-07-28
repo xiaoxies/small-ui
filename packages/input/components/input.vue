@@ -7,14 +7,17 @@
             <input
                     :style="!!prefixIcon?'padding-left:30px;':''"
                     :value="value"
-                    :type="myType"
+                    :type="type"
                     @input="onInput"
                     @focus="onFocus"
                     @blur="onBlur"
                     ref="input"
                     :placeholder="placeholder"
                     :disabled="disabled"
+                    :autocomplete="autoComplete"
                     :readonly="readonly"
+                    :min="min"
+                    :max="max"
                     :class="[
                     'small-input__inner',
                     'small-input-'+size,
@@ -49,9 +52,15 @@
         componentName:"sInput",
         mixins:[inputMixins],
         props:{
-            value:[Date,String],
+            value:[Date,String,Number],
             suffixIcon:String,
             prefixIcon:String,
+            min:Number,
+            max:Number,
+            autoComplete: {
+                type: String,
+                default: 'off'
+            },
             clear:{
                 type:Boolean,
                 default:true
@@ -119,8 +128,12 @@
 </script>
 
 <style scoped lang="less">
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
     .small-input-row{width:100%;position: relative;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
-    .small-input{ position: relative;display:inline-table;width:100%;}
+    .small-input{ position: relative;display:inline-table;width:100%;-webkit-appearance: none;}
     .small-input__inner{
         -webkit-appearance: none;background-color: #fff;cursor: pointer;
         background-image: none;border-radius: 4px;
