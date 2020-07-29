@@ -17,7 +17,7 @@
         props:{
             height:{type:String,default:"200px"}
         },
-        mounted(){
+        updated(){
             this.$nextTick(this.update);
         },
         destroyed(){
@@ -48,7 +48,9 @@
                 let widthPercentage = (wrap.clientWidth * 100 / wrap.scrollWidth);
                 this.sizeHeight = (heightPercentage < 100) ? (heightPercentage + '%') : '0';
                 this.sizeWidth = (widthPercentage < 100) ? (widthPercentage + '%') : '0';
-                this.eventSize();
+                if(!this.observer){
+                    this.eventSize();
+                }
             }
         },
         data() {

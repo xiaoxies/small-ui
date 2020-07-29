@@ -1,8 +1,8 @@
 <template>
-    <div class="small-time-fixed">
+    <div class="small-time-fixed" v-time-fixed>
         <s-input readonly size="medium" prefix-icon="icon-shijian-xianxing" v-model="value"></s-input>
         <transition name="time-fixed">
-            <div class="small-time-fixed-body">
+            <div class="small-time-fixed-body" v-show="visible">
                 <ul class="small-time-fixed-menu">
                     <s-scrollbar>
                         <li v-for="(item,index) in list" :key="index">{{item}}</li>
@@ -73,12 +73,51 @@
             end:{type:String,default:"24:00"},
             step:{type:String,default:"00:15"},
         },
+        directives:{
+            timeFixed:{
+                bind(el,bindings,vnode){
+                    el.handler=(e)=>{
+                        if(!vnode.context.closed){
+                            return
+                        }
+                        if(el.contains(e.target)){
+                            if(!vnode.context.visible){
+                                vnode.context.show();
+                            }else{
+                                if(el.trigger=="click"){
+                                    vnode.context.hide();
+                                }
+                            }
+                        }else{
+                            vnode.context.hide();
+                        }
+                    };
+                    document.addEventListener('click',el.handler)
+                },
+                unbind(el,bindings,vnode){
+                    document.removeEventListener('click',el.handler)
+                }
+            }
+        },
+        methods:{
+            show(){
+                this.visible=true;
+                this.$emit("show");
+            },
+            hide(){
+                this.visible=false;
+                this.closed=false;
+                setTimeout(()=>{
+                    this.closed=true;
+                },300)
+                this.$emit("hide");
+            }
+        },
         computed:{
             list() {
                 const start = this.start;
                 const end = this.end;
                 const step = this.step;
-
                 const result = [];
 
                 if (start && end && step) {
@@ -93,7 +132,8 @@
         },
         data() {
             return {
-
+                visible:false,
+                closed:true
             }
         }
     }
@@ -128,4 +168,16 @@
     .small-time-fixed-body{
         position: absolute;width:100%;left:0px;top:35px;padding-top:13px;
     }
+
+    .time-fixed-enter-active{animation: time-fixed-fade-in 0.3s;}
+    .time-fixed-leave-active{animation: time-fixed-fade-out 0.3s;}
+    @keyframes time-fixed-fade-in {
+        0%{transform: translate3d(0,-20px,0);opacity:0}
+        100%{transform: translate3d(0,0,0);opacity:1}
+    }
+    @keyframes time-fixed-fade-out {
+        0%{transform: translate3d(0,0,0);opacity:1}
+        100%{transform: translate3d(0,-20px,0);opacity:0}
+    }
+
 </style>
