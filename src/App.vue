@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      
+      <s-time-picker v-model="value"></s-time-picker>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
     export default {
         data(){
           return {
-              value:"2",
+              value:"",
               list:[
                   {label:"第一个",value:1},
                   {label:"第二个",value:2},
@@ -28,9 +28,9 @@
 </script>
 
 <style lang="less">
-    *{padding:0px;margin:0px;box-sizing: border-box;}
+    *{padding:0px;margin:0px;}
     body{padding:0px;margin:0px;box-sizing: border-box;}
     #app{
-      padding:200px;
+      padding:200px;width:600px;
     }
 </style>

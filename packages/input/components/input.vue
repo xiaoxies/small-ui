@@ -16,8 +16,6 @@
                     :disabled="disabled"
                     :autocomplete="autoComplete"
                     :readonly="readonly"
-                    :min="min"
-                    :max="max"
                     :class="[
                     'small-input__inner',
                     'small-input-'+size,
@@ -55,8 +53,6 @@
             value:[Date,String,Number],
             suffixIcon:String,
             prefixIcon:String,
-            min:Number,
-            max:Number,
             autoComplete: {
                 type: String,
                 default: 'off'

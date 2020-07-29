@@ -12,9 +12,10 @@ import {sDatePicker} from "./date-picker";
 import {sLoading,$loading} from "./loading";
 import {sTimelineItem,sTimeline} from "./timeline";
 import {sSteps,sStepsItem} from "./steps";
+import {sTree,sTreeItem} from "./tree";
 import sCard from "./card";
 import sCascader from "./cascader";
-import {sTree,sTreeItem} from "./tree";
+import sTimePicker from "./time-picker";
 import sDrawer from "./drawer";
 import sAside from "./aside";
 import sPagination from "./pagination";
@@ -22,6 +23,7 @@ import sProgress from "./progress";
 import sHeader from "./header";
 import sContainer from "./container";
 import sFooter from "./footer";
+import sScrollbar from "./scrollbar";
 import {sSelect,sOption} from "./select";
 import sMain from "./main";
 import sPopconfirm from "./popconfirm";
@@ -46,6 +48,8 @@ import sMessageBox from "./message-box";
 import sNotify from "./notify";
 
 function install (_vue){
+    _vue.component(sScrollbar.name,sScrollbar);
+    _vue.component(sTimePicker.name,sTimePicker);
     _vue.component(sPagination.name,sPagination);
     _vue.component(sSteps.name,sSteps);
     _vue.component(sSelect.name,sSelect);
@@ -107,6 +111,8 @@ function install (_vue){
 
 
 export {
+    sScrollbar,
+    sTimePicker,
     sPagination,
     sOption,
     sSelect,
