@@ -5,7 +5,11 @@
             <div class="small-time-fixed-body" v-show="visible">
                 <ul class="small-time-fixed-menu">
                     <s-scrollbar>
-                        <li v-for="(item,index) in list" :key="index">{{item}}</li>
+                        <li v-for="(item,index) in list" :key="index" :class="[
+                            'small-time-fixed-item',
+                            {'small-time-fixed-active':item == value},
+                            {'small-time-fixed-disabled':disabledFunc(item,index)}
+                        ]" @click="clickHander(item,disabledFunc(item,index))">{{item}}</li>
                     </s-scrollbar>
                 </ul>
                 <div class="small-time-arrow"></div>
@@ -68,10 +72,11 @@
         componentName:"sTimeFixedPicker",
         components:{sInput,sScrollbar},
         props:{
-            value:String | Date,
+            value:String,
             start:{type:String,default:"00:00"},
             end:{type:String,default:"24:00"},
             step:{type:String,default:"00:15"},
+            disabledFunc:{type:Function,default:()=>false}
         },
         directives:{
             timeFixed:{
@@ -100,6 +105,13 @@
             }
         },
         methods:{
+            clickHander(item,bool){
+                if(bool){
+                    return
+                }
+                this.$emit("value",item);
+                this.hide();
+            },
             show(){
                 this.visible=true;
                 this.$emit("show");
@@ -149,13 +161,16 @@
         background:#fff;position: relative;overflow-y: auto;
         border: 1px solid #e4e7ed;border-radius: 4px;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-        li{
+        .small-time-fixed-item{
             width:100%;padding:0px 15px;color: #606266;font-size:14px;height:35px;line-height:35px;cursor: pointer;
             &:hover{
                 background-color: #f5f7fa;font-weight:bold;
             }
         }
+        .small-time-fixed-active{color: #409eff;font-weight:bold;}
+        .small-time-fixed-disabled{color: #c0c4cc;cursor: not-allowed;}
     }
+
     .small-time-fixed-menu::-webkit-scrollbar-button{display:none;}
     .small-time-arrow{
         position: absolute;width:0;height:0;border-left: 10px solid transparent;border-right: 10px solid transparent;

@@ -19,7 +19,9 @@ export default {
                 return h(sTimeFixedPicker,{
                     attrs:Object.assign({},this.$props,this.$attrs),
                     on:{
-
+                        value(item){
+                            self.updateModel(item)
+                        }
                     }
                 })
         }

@@ -20,8 +20,6 @@
         name: "sButton",
         componentName:"sButton",
         props:{
-            multiple:{type:Boolean,default:false},
-            accept:{type:String,default:"image/*"},
             icon:String,
             disabled:{
                 type:Boolean,

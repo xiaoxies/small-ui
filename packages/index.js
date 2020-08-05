@@ -46,8 +46,11 @@ import sInput from "./input";
 import sMessage from "./message";
 import sMessageBox from "./message-box";
 import sNotify from "./notify";
+import {sTable,sTableColumn} from "./table";
 
 function install (_vue){
+    _vue.component(sTable.name,sTable);
+    _vue.component(sTableColumn.name,sTableColumn);
     _vue.component(sScrollbar.name,sScrollbar);
     _vue.component(sTimePicker.name,sTimePicker);
     _vue.component(sPagination.name,sPagination);
@@ -111,6 +114,8 @@ function install (_vue){
 
 
 export {
+    sTable,
+    sTableColumn,
     sScrollbar,
     sTimePicker,
     sPagination,
