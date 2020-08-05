@@ -8,10 +8,11 @@
                 <slot></slot>
             </div>
             <div class="small-table-header-wrapper">
-                <table-header :columns="getColumns()"></table-header>
+                <table-header :columns="getColumns"></table-header>
             </div>
             <div class="small-table-body-wrapper">
-                <table-body :columns="getColumns()" ref="body" :data="data"></table-body>
+                <table-body :columns="getColumns" ref="body" :data="data"></table-body>
+                <div class="small-zanwu" v-if="data.length==0">暂无</div>
             </div>
 
             <div class="small-table-fixed-left" v-if="fixedLeft.length>0">
@@ -38,7 +39,7 @@
         },
         watch:{
             data(){
-                this.updateHeight();
+                this.$nextTick(this.updateHeight)
             }
         },
         provide(){
@@ -46,10 +47,12 @@
                 "sTable":this
             }
         },
-        methods:{
+        computed:{
             getColumns(){
                 return this.fixedLeft.concat(this.columns).concat(this.fixedRight)
-            },
+            }
+        },
+        methods:{
             updateHeight(){
                 let tr=this.$refs.body.$el.querySelectorAll('table tr');
                 this.height=Array.from(tr).map((el,index)=>{
@@ -76,6 +79,7 @@
     .small-table{
         width:100%;box-sizing: border-box;transform: translate3d(0,0,0);
     }
+    .small-zanwu{width:100%;height:45px;line-height:45px;text-align:center;font-size:14px;}
     .small-table-column{display:none;}
     .small-table-fixed-left{
         position: fixed;top:0px;left:0px;display:flex;align-items: flex-start;justify-content: flex-start;}
