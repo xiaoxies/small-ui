@@ -1,7 +1,7 @@
 # small-ui
 
 ```
-    作者: 小谢(谢楚锋)
+    作者: 小谢
     时间: 2020-06-05
     参考element-ui和iview,bootstrap其他UI库整理的自己一套UI
 ```
